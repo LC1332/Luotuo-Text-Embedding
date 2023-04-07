@@ -8,6 +8,10 @@ Luotuo Embedding belongs to the project [Luotuo(骆驼)](https://github.com/LC13
 
 + 如果你感到这个页面对你有帮助，拜托您去我们[骆驼的主页](https://github.com/LC1332/Luotuo-Chinese-LLM)也点上star，非常感谢！
 
+## Report
+
+See our in writing report [here](./report.md)
+
 
 ## A Quick Start
 
