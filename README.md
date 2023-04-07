@@ -15,7 +15,7 @@ Luotuo Embedding(骆驼嵌入) is a text embedding model, which developed by 李
 
 ## Contributors
 
-The author order is random, we detailly record the contribution here.
+The author order is in random, we detailly record the contribution here.
 
 李鲁鲁 proposed the project, and do the starting effort on the preliminary experiment of embedding and designed the test and visualization.
 
