@@ -2,6 +2,11 @@
 
 Luotuo Embedding(骆驼嵌入) is a text embedding model, which developed by 李鲁鲁, 冷子昂, 陈启源, 蒟蒻, HS, 641, 年等.
 
+Luotuo Embedding belongs to the project [Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM), which created by 李鲁鲁, 冷子昂, 陈启源
+
++ If you find this helpful, please star our major repo [Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM), Thanks Very Much
+
++ 如果你感到这个页面对你有帮助，拜托您去我们[骆驼的主页](https://github.com/LC1332/Luotuo-Chinese-LLM)也点上star，非常感谢！
 
 
 ## A Quick Start
@@ -51,11 +56,17 @@ Embedding的测试需求
 
 + t-SNE展示
 
+这里鲁叔有个特别的t-SNE设计
+
+
+
+
++ t-SNE with more data
+
 base语料里面，找3个高频词。
 
 相关的文章形成3个类，展示特征的t-SNE
 
-这里鲁叔有个特别的t-SNE设计
 
 + 下游分类任务展示
 
