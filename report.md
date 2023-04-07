@@ -4,15 +4,19 @@ Liu Siyi *, 冷子昂 *, 陈启源 *, 蒟蒻 *, HS *, 641 *, 年 *, 李鲁鲁 *
 
 #### 作者的footnote
 
-The author order is in random, we detailly record the contribution here.
+作者的顺序是完全随机的，每个人的具体贡献如下:
 
-李鲁鲁 proposed the project, and do the starting effort on the preliminary experiment of embedding and designed the test and visualization.
+李鲁鲁提议了整个项目，并完成了初始的实验验证，以及编写了最终的技术报告。
 
-陈启源 and HS implemented the data collecting server and collect all data.
+陈启源和HS建立了数据收集的架构，并完成了数据的收集
 
-冷子昂 and 641 developed the training framework and trained the GLM based Embedding model.
+冷子昂 and 641 实现了训练的代码，并完成了基于GLM的text embedding训练
 
-蒟蒻 developed an individual training framework and trained BERT based Embedding model.
+蒟蒻独立建立了另一套使用BERT等模型的训练代码。
+
+年完成了实验的部分
+
+孙骜完成了CoT的实验部分
 
 ## 摘要
 
