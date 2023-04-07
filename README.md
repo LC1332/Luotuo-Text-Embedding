@@ -58,6 +58,25 @@ Embedding的测试需求
 
 这里鲁叔有个特别的t-SNE设计
 
+<p align="center">
+    <img src="image/visualize_illustration.png">
+</p>
+
+考虑一个N类的t-SNE。我至多左右展示2M句话
+
+每一句话都有一个展示位置。比如左侧就是 (图像左边界，(i-M/2) * offset)
+
+所以有2M个展示位置
+
+每个类c有一个颜色 (r_c,g_c,b_c)
+
+从数据中，sample 2M个样本点，
+
+然后这2M个样本点关于t_SNE的位置，和2M个展示位置做匹配
+
+样本展示的颜色 = 类颜色 + 30级别的RGB扰动
+
+连线考虑使用横线+斜线，如果算不出来就一根线直接连过去
 
 
 
