@@ -1,6 +1,6 @@
 # Luotuo Embedding: Generative Text Embedding Model distilled from OpenAI API
 
-Liu Siyi^*^, 冷子昂^*^, 陈启源^*^, 蒟蒻^*^, HS^*^, 641^*^, 年^*^, 李鲁鲁^*^
+Liu Siyi<sup>*</sup>, 冷子昂<sup>*</sup>, 陈启源^*^, 蒟蒻^*^, HS^*^, 641^*^, 年^*^, 李鲁鲁^*^
 
 #### 作者的footnote
 
