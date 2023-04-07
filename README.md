@@ -1,4 +1,4 @@
-# Luotuo Embedding(骆驼嵌入): Generative Text Embedding Model distilled from OpenAI API
+# Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
 Luotuo Embedding(骆驼嵌入) is a text embedding model, which developed by 李鲁鲁, 冷子昂, 陈启源, 蒟蒻, HS, 641, 年等.
 
@@ -77,9 +77,6 @@ Embedding的测试需求
 我的colab里面已经有基本的例子
 
 把我的词云加上stop words过滤
-
-
-
 
 
 + t-SNE with more data
