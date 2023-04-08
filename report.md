@@ -75,25 +75,36 @@
 
 在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。本章节的组织如下，sec_loss_function 介绍了我们Loss的构造，
 
+### BERT作为Backbone
+大部分现有的embedding model都是使用Transformer Encoder architecture作为model的backbone（Bert，Roberta）。使用这种架构的好处在于bidirectional encoder能够掌握前后文的信息，从而更好的学习文字的表征。这篇工作同样使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。
+
+
+### 利用GLM-10b-Chinese对embedding初始化
+
+不同于之前的embedding model随机（或normal）初始化BERT的embedding layer，[OpenAIembedding论文]的工作提出了一种使用大语言模型初始化encoder的方法。Following their work，我们将input_ids输入进GLM-10b-Chinese并取他最后一层的hidden states作为我们encoder的input。换言而之，我们抛弃了原生的embedding层，并使用GLM去生成embedding，然后把GLM生成的embedding作为encoder的input去训练，并在训练过程中freeze了GLM的参数。此举旨在利用GLM大的参数量和parametric knowledge去初始化一个较为好的embedding。我们希望这个embedding可以一定程度的保留GLM的知识，并基于它去继续学习。
+
+
 
 ### 损失函数的构造
 
-我们的损失函数有两项构成，Ldistill，LCSE。
+我们的损失函数由三项构成，Ldistill，LCSE。
+
++ In-batch Contrastive Loss
+第一个loss基于标准的contrastive learning。每一个input instance是一对相似的文本sent_1, sent_2。然后在一个batch_size=N 的batch中，sent_1 与sent_2作为一个positive example，然后sent_1 与batch内的其他任意文本作为negative example，以此类推。最后的loss是每一个sent_i与batch内其他文本的cross_entropy的总和。
 
 + Distill Loss
-
 
 + 加权SoftMax Loss
 
 
 
-### GLM作为Input
 
-### BERT作为Backbone
+
 
 
 ### 训练的细节
 
 ## 数据
+CNewSum
 
 ## 结果
