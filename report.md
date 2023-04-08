@@ -1,6 +1,6 @@
 # Luotuo Embedding: Generative Text Embedding Model distilled from OpenAI API
 
-Liu Siyi *, 冷子昂 *, 陈启源 *, 蒟蒻 *, HS *, 641 *, 年 *, 李鲁鲁 *
+陈启源 *, Liu Siyi *, 冷子昂 *,  蒟蒻 *, HS *, 641 *, 年 *, 李鲁鲁 *
 
 #### 作者的footnote
 
@@ -71,7 +71,17 @@ Liu Siyi *, 冷子昂 *, 陈启源 *, 蒟蒻 *, HS *, 641 *, 年 *, 李鲁鲁 *
 考虑到有很多的监督应用，我们这里主要展示了搜索、文本可视化，以及一个AutoCoT的应用。更多的下游应用我们计划在之后的版本进行补充。
 
 
-## 训练的loss
+## 模型的训练
+
+在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑
+
+
+### 损失函数的构造
+
+
+### 加权SoftMax Loss
+
+### Distill Loss
 
 
 ## 训练
