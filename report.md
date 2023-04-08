@@ -85,8 +85,12 @@ sec_loss_function
 
 + Distill Loss
 
+### GLM作为Input
 
-## 训练
+### BERT作为Backbone
+
+
+### 训练的细节
 
 ## 数据
 
