@@ -49,6 +49,21 @@ Liu Siyi *, 冷子昂 *, 陈启源 *, 蒟蒻 *, HS *, 641 *, 年 *, 李鲁鲁 *
 
 + 本文在CoT等实验中，验证了我们提出的Text Embedding的有效性。
 
+## Embedding的特点和相关工作
+
+作为一个self-contain的报告，我们在这里描述一下Text Embedding的基本目标和相关的工作。
+
+
++ Text Embedding的训练目标
+
+这里chenqy补充一下？从基础n-gram的embedding，讲到bert，再讲到GPT3那个？
+
+然后讲一下有监督和自学习的loss，我们这里主要是启用了自学习的loss。
+
+图\ref{embed_compare_fig1}中可以看到，我们使用 [字节那个数据集]
+
++ Text Embedding的下游应用
+
 
 
 
