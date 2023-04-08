@@ -76,14 +76,16 @@
 在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。本章节的组织如下，sec_loss_function 介绍了我们Loss的构造，
 
 
-
 ### 损失函数的构造
 
-sec_loss_function
+我们的损失函数有两项构成，Ldistill，LCSE。
+
++ Distill Loss
+
 
 + 加权SoftMax Loss
 
-+ Distill Loss
+
 
 ### GLM作为Input
 
