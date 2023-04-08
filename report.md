@@ -1,6 +1,6 @@
 # Luotuo Embedding: Generative Text Embedding Model distilled from OpenAI API
 
-陈启源 *, Liu Siyi *, 冷子昂 *,  蒟蒻 *, HS *, 641 *, 年 *, 李鲁鲁 *
+冷子昂 *,  Liu Siyi *, 陈启源 *,  蒟蒻 *, HS *, 641 *, 年 *, 李鲁鲁 *
 
 #### 作者的footnote
 
@@ -73,15 +73,17 @@
 
 ## 模型的训练
 
-在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑
+在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。本章节的组织如下，sec_loss_function 介绍了我们Loss的构造，
+
 
 
 ### 损失函数的构造
 
+sec_loss_function
 
-### 加权SoftMax Loss
++ 加权SoftMax Loss
 
-### Distill Loss
++ Distill Loss
 
 
 ## 训练
