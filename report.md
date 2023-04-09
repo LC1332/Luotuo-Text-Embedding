@@ -114,6 +114,8 @@ KL(p_n* ||  q_n* ) = sum_i p_ni log(p_ni / q_ni )
 
 L_KL = 1/2n * sum_n ( KL(p_n* ||  q_n* )  + KL(p_*n ||  q_*n ) )
 
+在第一个版本中，我们先没有使用这个KL散度的实现，我们将在后续放出的模型中使用这个Loss。
+
 
 
 ### 训练的细节
