@@ -65,7 +65,7 @@
 + Text Embedding的下游应用
 
 <p align="center">
-    <img src="https://github.com/LC1332/Luotuo-Text-Embedding/blob/main/image/super_tSNE.png" alt="silk-magic-book" width="300">
+    <img src="https://github.com/LC1332/Luotuo-Text-Embedding/blob/main/image/super_tSNE.png" alt="silk-magic-book" height="350">
 </p>
 
 A t-SNE visualization for proposed Embedding. Embedding有着多样化的下游应用，如数据可视化、聚类、搜索、分类等等。
