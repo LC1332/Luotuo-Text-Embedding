@@ -83,6 +83,20 @@ Embedding的测试需求
     <img src="image/CSEvisual.png">
 </p>
 
+首先，最右侧是热图，热图务必用Jet的色表，务必显示右侧的colorbar
+
+我建议输入格式支持setence pair（分好的） 和combined sentence
+
+如果是combined setence，我有一个strong divide函数可以切开（记得问我要一下）
+
+然后计算vecs（也可以预先载入，如果预先有就不重新计算了）
+
+然后有一个visual_id，选择哪些对角线展示，如果visual_id为空，则均匀抽样
+
+分别显示行和列的文字，并向对角线的元素连线，颜色使用对角线上那个元素的颜色
+
+就是这样
+
 + 聚类+词云展示
 
 我的colab里面已经有基本的例子
