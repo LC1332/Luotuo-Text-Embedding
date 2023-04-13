@@ -1,4 +1,4 @@
-English | 快速上手 | 赞助 | 人员和贡献
+English | 快速上手 | Embedding应用 | 赞助 | 人员和贡献
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
@@ -34,6 +34,20 @@ English | 快速上手 | 赞助 | 人员和贡献
 + If you find this helpful, please star our major repo [Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM), Thanks Very Much
 
 + 如果你感到这个页面对你有帮助，拜托您去我们[骆驼的主页](https://github.com/LC1332/Luotuo-Chinese-LLM)也点上star，非常感谢！
+
+## 快速上手
+
+TODO:
+
++ 小模型连接可视化的evaluate代码（colab免费机器也能跑最好）
+
++ 大模型连接可视化的evaluate代码
+
++ 小模型的evaluate代码
+
++ 大模型的evaluate代码
+
+
 
 ## Report
 
