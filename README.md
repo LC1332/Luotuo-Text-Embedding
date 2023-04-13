@@ -65,7 +65,9 @@ TODO:
 
 - [文本的模糊搜索](#sec-IR) 周鸿祎为什么喜欢穿红衣？
 
-- [文本的模糊搜索](#sec-IR) 周鸿祎为什么喜欢穿红衣？
+- [文本聚类](#sec-grouping) 找呀找呀找朋友
+
+- [少样本的分类学习](#sec-classificationg) 用embedding解决审核任务
 
 
 <a name="sec-visual"></a>
