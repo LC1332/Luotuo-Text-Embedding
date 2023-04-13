@@ -1,6 +1,6 @@
 <a name="BigTitle"></a>
 
-English | [快速上手](#quickstart) | Embedding应用 | [数据](#data) | [赞助](#sponsorship) | 人员和贡献 | [引用](#cite)
+English | [快速上手](#quickstart) | [Embedding应用](#application) | [数据](#data) | [赞助](#sponsorship) | [人员](#contributor) | [引用](#cite)
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
@@ -60,6 +60,8 @@ TODO:
 | 小模型Clean | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT最简代码的notebook |
 | 大模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型最简代码的notebook |
 
+
+<a name="application"></a>
 
 ## Embedding应用
 
@@ -172,6 +174,31 @@ TODO:
 如果你有兴趣赞助骆驼项目，请点击[主项目](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships)或者查看[赞助表单](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md)
 
 If you are interested in sponsoring the [Luotuo Project](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships), please click on the [major project](https://github.com/LC1332/Luotuo-Chinese-LLM) or view the [sponsorship form](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md).
+
+<a name="contributor"></a>
+
+## 人员
+
+更详细的整个骆驼项目相关的人员信息，请查看[骆驼项目的主页](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B4%A1%E7%8C%AE%E8%80%85contributors)
+
+每个作者都是第一作者，顺序是随机的。
+
+李鲁鲁发起了项目，并完成了初步的验证，提出了KL散度Loss和Hard Negative挖掘。
+
+刘思祎完成了初步训练框架的编写，以及支撑了后面模型上传到hugging face管线。
+
+冷子昂完成了完整的大模型和小模型的训练，包括载入数据和损失函数的实现。
+
+陈启源准备了CNewSum的数据，做了句子切分。
+
+黄泓森负责爬取了OpenAI Embedding的数据。
+
+陈舒年完成了重要的几个可视化。
+
+孙骜（即将）用我们的得到的Embedding，完成CoT的提升实验。
+
+胡婧收集了周杰伦的歌词，并（即将）完成更多的定量实验。
+
 
 <a name="cite"></a>
 
