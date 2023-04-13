@@ -1,8 +1,35 @@
+English | 快速上手 | 赞助 | 人员和贡献
+
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
-Luotuo Embedding(骆驼嵌入) is a text embedding model, which developed by 李鲁鲁, 冷子昂, 陈启源, 蒟蒻, HS, 641, 年等.
+骆驼嵌入是一个文本嵌入(text embedding)模型，由冷子昂, 刘思祎, 陈启源, 黄泓森, 陈舒年, 孙骜, 胡婧,李鲁鲁等开发
 
-Luotuo Embedding belongs to the project [Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM), which created by 李鲁鲁, 冷子昂, 陈启源
+<details>
+  <summary> 每个作者都是第一作者，顺序是随机的。(点这里具体)</summary>
+
+李鲁鲁发起了项目，并完成了初步的验证，提出了KL散度Loss和Hard Negative挖掘。
+
+刘思祎完成了初步训练框架的编写，以及支撑了后面模型上传到hugging face管线。
+
+冷子昂完成了完整的大模型和小模型的训练，包括载入数据和损失函数的实现。
+
+黄泓森负责爬取了OpenAI Embedding的数据。
+
+陈启源协助修改了arxiv的论文。
+
+陈舒年完成了重要的几个可视化。
+
+孙骜（即将）用我们的得到的Embedding，完成CoT的提升实验。
+
+胡婧（即将）完成更多的定量实验。
+
+</details>
+
+骆驼嵌入是[Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM)的子项目之一, 后者由李鲁鲁, 冷子昂, 陈启源发起。
+
+<p align="center">
+    <img src="image/LuotuoEmbedding.png">
+</p>
 
 + If you find this helpful, please star our major repo [Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM), Thanks Very Much
 
