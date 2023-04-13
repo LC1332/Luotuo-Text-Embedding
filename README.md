@@ -59,6 +59,18 @@ TODO:
 
 ## Embedding应用
 
+- [文本数据可视化](#sec-visual)
+
+任意文本分类数据的可视化
+
+- [文本相关性测试](#sec-CSE)
+
+周杰伦歌词之间的相关性测试。
+
+- [文本的模糊搜索](#sec-IR)
+
+
+<a name="sec-visual"></a>
 
 ### 文本数据可视化
 
@@ -70,6 +82,7 @@ TODO:
     <img src="image/super_tSNE.png" height="350">
 </p>
 
+<a name="sec-CSE"></a>
 
 ### 文本相关性测试
 
@@ -107,6 +120,8 @@ TODO:
 + TODO: 收集语料在大、小模型上的embedding
 
 + TODO: 补充结论段
+
+<a name="sec-IR"></a>
 
 ### 模糊问题搜索
 
