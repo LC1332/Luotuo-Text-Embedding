@@ -1,4 +1,4 @@
-English | 快速上手 | Embedding应用 | 赞助 | 人员和贡献
+English | 快速上手 | Embedding应用 | 训练方法 | 训练数据 | 赞助 | 人员和贡献
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
@@ -67,8 +67,22 @@ TODO:
 对于任意多类的数据，围绕我们发布的Embedding模型，我们准备了一个特殊的可视化代码，可以将类别展示在二维平面，并抽样展示部分文本的内容。你可以直接在 大模型链接 / 小模型链接 中 运行体验。
 
 <p align="center">
-    <img src="image/super_tSNE.png">
+    <img src="image/super_tSNE.png" height="350">
 </p>
+
+
+### 文本相关性测试
+
++ TODO: 完成可视化，在这里使用新闻+周杰伦的数据
+
+在OpenAI的论文(补充论文)中，使用了大量文本（补充数量）来进行自监督学习。其关键假设是，在切开的文本中，连续的两段长文本是相关的。
+
+<p align="center">
+    <img src="image/CSEvisual.png" height="350">
+</p>
+
+在这个测试中，我们使用一些训练数据(新闻数据)完全不覆盖的语料数据(中学语文课文和流行音乐歌词)，来进行测试。
+
 
 
 ## Report
