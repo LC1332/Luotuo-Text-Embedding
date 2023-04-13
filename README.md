@@ -1,8 +1,8 @@
-English | 快速上手 | Embedding应用 | 训练方法 | 训练数据 | 赞助 | 人员和贡献
+English | 快速上手 | Embedding应用 | 训练方法 | 训练数据 | 赞助 | 人员和贡献 | 引用
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
-骆驼嵌入是一个文本嵌入(text embedding)模型，由冷子昂, 刘思祎, 陈启源, 黄泓森, 陈舒年, 孙骜, 胡婧,李鲁鲁等开发
+骆驼嵌入是一个文本嵌入(text embedding)模型，由冷子昂, 刘思祎, 黄泓森, 陈舒年, 胡婧, 陈启源, 骜, 李鲁鲁等开发
 
 <details>
   <summary> 每个作者都是第一作者，顺序是随机的。(点这里具体)</summary>
@@ -141,6 +141,38 @@ TODO:
 
 + TODO
 
+## Sponsorship(赞助) for Proj Luotuo
+
+如果你有兴趣赞助骆驼项目，请点击[主项目](https://github.com/LC1332/Luotuo-Chinese-LLM)或者查看[赞助表单](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md)
+
+If you are interested in sponsoring the [Luotuo Project](https://github.com/LC1332/Luotuo-Chinese-LLM), please click on the [major project](https://github.com/LC1332/Luotuo-Chinese-LLM) or view the [sponsorship form](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md).
+
+## Citation
+
+Please cite the repo if you use the data or code in this repo.
+
+```
+@misc{alpaca,
+  author={Siyi Liu, Ziang Leng, Hongsen Huang, Shunian Chen, Jing Hu, Qiyuan Chen, Ao sun, Cheng Li},
+  title = {Luotuo Embedding: Generative Text Embedding Model distilled from OpenAI API},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/LC1332/Luotuo-Text-Embedding}},
+}
+```
+
+```
+@misc{alpaca,
+  author={Ziang Leng, Qiyuan Chen and Cheng Li},
+  title = {Luotuo: An Instruction-following Chinese Language model, LoRA tuning on LLaMA},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/LC1332/Luotuo-Chinese-LLM}},
+}
+```
+
 ---
 
 
@@ -158,18 +190,6 @@ See our in writing report [here](./report.md)
 
 ## Trained Models
 
-
-## Contributors
-
-The author order is in random, we detailly record the contribution here.
-
-李鲁鲁 proposed the project, and do the starting effort on the preliminary experiment of embedding and designed the test and visualization.
-
-陈启源 and HS implemented the data collecting server and collect all data.
-
-冷子昂 and 641 developed the training framework and trained the GLM based Embedding model.
-
-蒟蒻 developed an individual training framework and trained BERT based Embedding model.
 
 ## TODO
 
