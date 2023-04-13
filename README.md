@@ -59,15 +59,13 @@ TODO:
 
 ## Embedding应用
 
-- [文本数据可视化](#sec-visual)
+- [文本数据可视化](#sec-visual) 任意文本分类数据的可视化
 
-任意文本分类数据的可视化
+- [文本相关性测试](#sec-CSE) 周杰伦歌词之间的相关性测试。
 
-- [文本相关性测试](#sec-CSE)
+- [文本的模糊搜索](#sec-IR) 周鸿祎为什么喜欢穿红衣？
 
-周杰伦歌词之间的相关性测试。
-
-- [文本的模糊搜索](#sec-IR)
+- [文本的模糊搜索](#sec-IR) 周鸿祎为什么喜欢穿红衣？
 
 
 <a name="sec-visual"></a>
@@ -125,8 +123,19 @@ TODO:
 
 ### 模糊问题搜索
 
++ TODO
 
+<a name="sec-grouping"></a>
 
+### 文本聚类
+
++ TODO
+
+<a name="sec-classification"></a>
+
+### 少样本的分类学习
+
++ TODO
 
 ## Report
 
