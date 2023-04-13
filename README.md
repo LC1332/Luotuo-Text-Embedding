@@ -1,8 +1,10 @@
-English | 快速上手 | Embedding应用 | 训练方法 | 训练数据 | 赞助 | 人员和贡献 | 引用
+<a name="BigTitle"></a>
+
+English | [快速上手](#quickstart) | [Embedding应用](#application) | [数据](#data) | [赞助](#sponsorship) | [人员](#contributor) | [引用](#cite)
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
-骆驼嵌入是一个文本嵌入(text embedding)模型，由冷子昂, 刘思祎, 黄泓森, 陈舒年, 胡婧, 陈启源, 骜, 李鲁鲁等开发
+骆驼嵌入是一个文本嵌入(text embedding)模型，由冷子昂, 刘思祎, 黄泓森, 陈舒年, 胡婧, 孙骜, 陈启源, 李鲁鲁等开发
 
 <details>
   <summary> 每个作者都是第一作者，顺序是随机的。(点这里具体)</summary>
@@ -13,9 +15,9 @@ English | 快速上手 | Embedding应用 | 训练方法 | 训练数据 | 赞助 
 
 冷子昂完成了完整的大模型和小模型的训练，包括载入数据和损失函数的实现。
 
-黄泓森负责爬取了OpenAI Embedding的数据。
+陈启源准备了CNewSum的数据，做了句子切分。
 
-陈启源协助修改了arxiv的论文。
+黄泓森负责爬取了OpenAI Embedding的数据。
 
 陈舒年完成了重要的几个可视化。
 
@@ -35,6 +37,8 @@ English | 快速上手 | Embedding应用 | 训练方法 | 训练数据 | 赞助 
 
 + 如果你感到这个页面对你有帮助，拜托您去我们[骆驼的主页](https://github.com/LC1332/Luotuo-Chinese-LLM)也点上star，非常感谢！
 
+<a name="quickstart"></a>
+
 ## 快速上手
 
 
@@ -53,9 +57,11 @@ TODO:
 | --- | --- | :--- |
 | 小模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT带可视化验证的notebook |
 | 大模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型带可视化验证的notebook |
-| 小模型Clean | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT最简代码的notebook |
-| 大模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型最简代码的notebook |
+| 小模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT最简代码的notebook |
+| 大模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型最简代码的notebook |
 
+
+<a name="application"></a>
 
 ## Embedding应用
 
@@ -141,19 +147,70 @@ TODO:
 
 + TODO
 
-## Sponsorship(赞助) for Proj Luotuo
+## 训练方法
 
-如果你有兴趣赞助骆驼项目，请点击[主项目](https://github.com/LC1332/Luotuo-Chinese-LLM)或者查看[赞助表单](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md)
+在训练中我们使用了三项Loss， 第一项是对OpenAI的feature求MSE的Loss（其实我估计L1更好）; 第二项是CSE Loss，也就是对文本对求相似度矩阵之后，横向和纵向，以对角为ground truth标签，求cross entropy; 第三项是KL散度的loss，对openAI得到的相关性矩阵P，和模型当前得到的相关性矩阵Q，按行和列分别求KL散度。
 
-If you are interested in sponsoring the [Luotuo Project](https://github.com/LC1332/Luotuo-Chinese-LLM), please click on the [major project](https://github.com/LC1332/Luotuo-Chinese-LLM) or view the [sponsorship form](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md).
+具体的内容可以看我们正在编写的[报告](./report.md)，等定量实验完成一些后，我们会先挂出中文的arxiv，方便大家引用我们的工作。补充更多定量实验之后，我会翻译成英文。
 
-## Citation
+### BERT模型
+
+对于BERT模型，我们增加了一个全连接层使得BERT的特征能够提升到1536维，并且使用沈向洋老师IDEA发布的中文CLIP模型为起点开始，进行训练，在所有数据上训练了总共5个Epoch。
+
+### GLM模型
+
+<a name="data"></a>
+
+## 数据
+
+在骆驼嵌入的训练中，我们使用了234.5K的[CNewSum](https://dqwang122.github.io/projects/CNewSum/)数据。将新闻数据清理后，前后切开，并调用OpenAI的text-embedding-ada-002模型，得到了所有文本对的1536维数据。
+
+我们准备公开这批数据，正在研究CNewSum和OpenAI的数据协议，并且准备申请共享这批数据的表格和网站，之后就会释放这批数据。
+
+<a name="sponsorship"></a>
+
+## 赞助(Sponsorship) 骆驼项目
+
+如果你有兴趣赞助骆驼项目，请点击[主项目](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships)或者查看[赞助表单](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md)
+
+If you are interested in sponsoring the [Luotuo Project](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships), please click on the [major project](https://github.com/LC1332/Luotuo-Chinese-LLM) or view the [sponsorship form](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md).
+
+<a name="contributor"></a>
+
+## 人员
+
+更详细的整个骆驼项目相关的人员信息，请查看[骆驼项目的主页](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B4%A1%E7%8C%AE%E8%80%85contributors)
+
+每个作者都是第一作者，顺序是随机的。
+
+李鲁鲁发起了项目，并完成了初步的验证，提出了KL散度Loss和Hard Negative挖掘。
+
+刘思祎完成了初步训练框架的编写，以及支撑了后面模型上传到hugging face管线。
+
+冷子昂完成了完整的大模型和小模型的训练，包括载入数据和损失函数的实现。
+
+陈启源准备了CNewSum的数据，做了句子切分。
+
+黄泓森负责爬取了OpenAI Embedding的数据。
+
+陈舒年完成了重要的几个可视化。
+
+孙骜（即将）用我们的得到的Embedding，完成CoT的提升实验。
+
+胡婧收集了周杰伦的歌词，并（即将）完成更多的定量实验。
+
+
+<a name="cite"></a>
+
+## 引用
+
+如果您在项目中使用了我们的模型、代码或者数据，请引用下面第一篇文章。
 
 Please cite the repo if you use the data or code in this repo.
 
 ```
 @misc{alpaca,
-  author={Siyi Liu, Ziang Leng, Hongsen Huang, Shunian Chen, Jing Hu, Qiyuan Chen, Ao sun, Cheng Li},
+  author={Siyi Liu, Ziang Leng, Hongsen Huang, Shunian Chen, Jing Hu, Ao sun, Qiyuan Chen, Cheng Li},
   title = {Luotuo Embedding: Generative Text Embedding Model distilled from OpenAI API},
   year = {2023},
   publisher = {GitHub},
@@ -175,6 +232,25 @@ Please cite the repo if you use the data or code in this repo.
 
 ---
 
+## TODO for RELEASE
+
+- [x] 构建项目页面
+- [ ] 发布小模型测试代码
+- [ ] 发布大模型测试代码
+- [ ] 下游应用——搜索小模型
+- [ ] 下游应用——聚类小模型
+- [ ] 下游应用——分类小模型
+- [ ] 下游应用——搜索大模型
+- [ ] 下游应用——聚类大模型
+- [ ] 下游应用——分类大模型
+- [ ] 翻译页面到英文
+- [ ] 发布数据
+- [ ] 扩充domain数据，训练一个更好的小模型
+- [ ] 扩充domain数据，训练一个更好的大模型
+- [ ] 编写arxiv补充实验
+- [ ] 清洁并发布训练代码
+
+---
 
 
 ## Report
