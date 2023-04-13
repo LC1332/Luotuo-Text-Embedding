@@ -37,7 +37,8 @@ class TSNE_Plot():
     
     def cluster(self):
         from sklearn.cluster import KMeans
-        pca = PCA(n_components=50)
+        n_components = min(50, len(self.test_X))
+        pca = PCA(n_components=n_components)
         compact_embedding = pca.fit_transform(np.array(self.test_X["embed"].tolist()))
         kmeans = KMeans(n_clusters=self.N)
         kmeans.fit(compact_embedding)
@@ -119,7 +120,8 @@ class TSNE_Plot():
 
     def calculate_tsne(self):   
         embed = np.array(self.test_X["embed"].tolist())
-        pca = PCA(n_components=50)
+        n_components = min(50, len(self.test_X))
+        pca = PCA(n_components=n_components)
         compact_embedding = pca.fit_transform(embed)
         tsne = TSNE(
             perplexity=30,
