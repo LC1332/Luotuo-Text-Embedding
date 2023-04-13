@@ -1,4 +1,6 @@
-English | 快速上手 | Embedding应用 | 训练方法 | 数据 | 赞助 | 人员和贡献 | 引用
+<a name="BigTitle"></a>
+
+English | [快速上手](#quickstart) | Embedding应用 | [数据](#data) | [赞助](#sponsorship) | 人员和贡献 | [引用](#cite)
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
@@ -34,6 +36,8 @@ English | 快速上手 | Embedding应用 | 训练方法 | 数据 | 赞助 | 人�
 + If you find this helpful, please star our major repo [Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM), Thanks Very Much
 
 + 如果你感到这个页面对你有帮助，拜托您去我们[骆驼的主页](https://github.com/LC1332/Luotuo-Chinese-LLM)也点上star，非常感谢！
+
+<a name="quickstart"></a>
 
 ## 快速上手
 
@@ -153,17 +157,23 @@ TODO:
 
 ### GLM模型
 
+<a name="data"></a>
+
 ## 数据
 
 在骆驼嵌入的训练中，我们使用了234.5K的[CNewSum](https://dqwang122.github.io/projects/CNewSum/)数据。将新闻数据清理后，前后切开，并调用OpenAI的text-embedding-ada-002模型，得到了所有文本对的1536维数据。
 
 我们准备公开这批数据，正在研究CNewSum和OpenAI的数据协议，并且准备申请共享这批数据的表格和网站，之后就会释放这批数据。
 
+<a name="sponsorship"></a>
+
 ## 赞助(Sponsorship) 骆驼项目
 
 如果你有兴趣赞助骆驼项目，请点击[主项目](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships)或者查看[赞助表单](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md)
 
 If you are interested in sponsoring the [Luotuo Project](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships), please click on the [major project](https://github.com/LC1332/Luotuo-Chinese-LLM) or view the [sponsorship form](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md).
+
+<a name="cite"></a>
 
 ## 引用
 
