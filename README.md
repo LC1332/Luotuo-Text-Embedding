@@ -151,7 +151,7 @@ Please cite the repo if you use the data or code in this repo.
 
 ```
 @misc{alpaca,
-  author={Siyi Liu, Ziang Leng, Hongsen Huang, Shunian Chen, Jing Hu, Qiyuan Chen, Ao sun, Cheng Li},
+  author={Siyi Liu, Ziang Leng, Hongsen Huang, Shunian Chen, Jing Hu, Ao sun, Cheng Li},
   title = {Luotuo Embedding: Generative Text Embedding Model distilled from OpenAI API},
   year = {2023},
   publisher = {GitHub},
