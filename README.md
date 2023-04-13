@@ -57,7 +57,18 @@ TODO:
 | 大模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型最简代码的notebook |
 
 
+## Embedding应用
 
+
+### 文本数据可视化
+
++ TODO: 在这里使用新闻数据
+
+对于任意多类的数据，围绕我们发布的Embedding模型，我们准备了一个特殊的可视化代码，可以将类别展示在二维平面，并抽样展示部分文本的内容。你可以直接在 大模型链接 / 小模型链接 中 运行体验。
+
+<p align="center">
+    <img src="image/super_tSNE.png">
+</p>
 
 
 ## Report
@@ -108,9 +119,7 @@ Embedding的测试需求
 
 这里鲁叔有个特别的t-SNE设计
 
-<p align="center">
-    <img src="image/super_tSNE.png">
-</p>
+
 
 考虑一个N类的t-SNE。我至多左右展示2M句话
 
