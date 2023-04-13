@@ -37,6 +37,7 @@ English | 快速上手 | Embedding应用 | 赞助 | 人员和贡献
 
 ## 快速上手
 
+
 TODO:
 
 + 小模型连接可视化的evaluate代码（colab免费机器也能跑最好）
@@ -46,6 +47,16 @@ TODO:
 + 小模型的evaluate代码
 
 + 大模型的evaluate代码
+
+
+|  | Colab链接 | 细节 |
+| --- | --- | :--- |
+| 小模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT带可视化验证的notebook |
+| 大模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型带可视化验证的notebook |
+| 小模型Clean | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT最简代码的notebook |
+| 大模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型最简代码的notebook |
+
+
 
 
 
