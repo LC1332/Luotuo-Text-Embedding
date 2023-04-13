@@ -143,6 +143,16 @@ TODO:
 
 ## 训练方法
 
+在训练中我们使用了三项Loss， 第一项是对OpenAI的feature求MSE的Loss（其实我估计L1更好）; 第二项是CSE Loss，也就是对文本对求相似度矩阵之后，横向和纵向，以对角为ground truth标签，求cross entropy; 第三项是KL散度的loss，对openAI得到的相关性矩阵P，和模型当前得到的相关性矩阵Q，按行和列分别求KL散度。
+
+具体的内容可以看我们正在编写的[报告](./report.md)，等定量实验完成一些后，我们会先挂出中文的arxiv，方便大家引用我们的工作。补充更多定量实验之后，我会翻译成英文。
+
+### BERT模型
+
+对于BERT模型，我们增加了一个全连接层使得BERT的特征能够提升到1536维，并且使用沈向洋老师IDEA发布的中文CLIP模型为起点开始，进行训练，在所有数据上训练了总共5个Epoch。
+
+### GLM模型
+
 ## 数据
 
 在骆驼嵌入的训练中，我们使用了234.5K的[CNewSum](https://dqwang122.github.io/projects/CNewSum/)数据。将新闻数据清理后，前后切开，并调用OpenAI的text-embedding-ada-002模型，得到了所有文本对的1536维数据。
@@ -185,6 +195,25 @@ Please cite the repo if you use the data or code in this repo.
 
 ---
 
+## TODO for RELEASE
+
+[x] 构建项目页面
+[ ] 发布小模型测试代码
+[ ] 发布大模型测试代码
+[ ] 下游应用——搜索小模型
+[ ] 下游应用——聚类小模型
+[ ] 下游应用——分类小模型
+[ ] 下游应用——搜索大模型
+[ ] 下游应用——聚类大模型
+[ ] 下游应用——分类大模型
+[ ] 翻译页面到英文
+[ ] 发布数据
+[ ] 扩充domain数据，训练一个更好的小模型
+[ ] 扩充domain数据，训练一个更好的大模型
+[ ] 编写arxiv补充实验
+[ ] 清洁并发布训练代码
+
+---
 
 
 ## Report
