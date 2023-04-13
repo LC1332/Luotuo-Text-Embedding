@@ -13,7 +13,7 @@ English | 快速上手 | Embedding应用 | 训练方法 | 训练数据 | 赞助 
 
 冷子昂完成了完整的大模型和小模型的训练，包括载入数据和损失函数的实现。
 
-陈启源准备了CNewSum的数据。
+陈启源准备了CNewSum的数据，做了句子切分。
 
 黄泓森负责爬取了OpenAI Embedding的数据。
 
@@ -153,7 +153,7 @@ Please cite the repo if you use the data or code in this repo.
 
 ```
 @misc{alpaca,
-  author={Siyi Liu, Ziang Leng, Hongsen Huang, Shunian Chen, Jing Hu, Ao sun, Cheng Li},
+  author={Siyi Liu, Ziang Leng, Hongsen Huang, Shunian Chen, Jing Hu, Ao sun, Qiyuan Chen, Cheng Li},
   title = {Luotuo Embedding: Generative Text Embedding Model distilled from OpenAI API},
   year = {2023},
   publisher = {GitHub},
