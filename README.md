@@ -57,7 +57,7 @@ Embedding的测试需求
 这里鲁叔有个特别的t-SNE设计
 
 <p align="center">
-    <img src="image/visualize_illustration.png">
+    <img src="image/super_tSNE.png">
 </p>
 
 考虑一个N类的t-SNE。我至多左右展示2M句话
@@ -75,6 +75,13 @@ Embedding的测试需求
 样本展示的颜色 = 类颜色 + 30级别的RGB扰动
 
 连线考虑使用横线+斜线，如果算不出来就一根线直接连过去
+
+
++ Correspondence展示
+
+<p align="center">
+    <img src="image/CSEvisual.png">
+</p>
 
 + 聚类+词云展示
 
