@@ -29,8 +29,9 @@ from networkx.algorithms.matching import max_weight_matching
 import networkx as nx
 
 class TSNE_Plot():
-    def __init__(self, sentence, embed, label = None, N = 3):
-        self.N = N
+    def __init__(self, sentence, embed, label = None, n_clusters :int = 3):
+        assert n_clusters > 0, "N must be greater than 0" 
+        self.N = n_clusters
         self.test_X = pd.DataFrame({"text": sentence, "embed": [np.array(i) for i in embed]})
         self.test_y = pd.DataFrame({'label':label}) if label is not None else pd.DataFrame({"label": self.cluster()})
         
@@ -128,16 +129,20 @@ class TSNE_Plot():
             metric="cosine",
             n_jobs=8,
             random_state=42,
-            verbose=True,
+            verbose=False,
         )
         embedding_train = tsne.fit(compact_embedding)
         embedding_train = embedding_train.optimize(n_iter=1000, momentum=0.8)
         return embedding_train
 
-    def random_sentence(self, N):
+    def random_sentence(self, n_sentence):
         #多次随机可能会影响可视化结果
-        n = len(self.test_y)
-        show_sentence = [np.random.randint(0, n) for i in range(N)]
+        n_samples = len(self.test_y)
+
+        show_sentence = []
+        while len(show_sentence) < n_sentence:
+            show_sentence.append(np.random.randint(0, n_samples))
+            show_sentence = list(set(show_sentence))
 
         # 确保每个标签至少有一个句子，用在show_sentence中最多的标签的句子来补充
         label_count = self.test_y["label"].value_counts()
@@ -246,12 +251,13 @@ class TSNE_Plot():
 
         fig.show()
     
-    def tsne_plot(self, n = 20):
+    def tsne_plot(self, n_sentence = 20):
         # 计算t-SNE，返回降维后的数据，每个元素为一个二维向量
         embedding_train = self.calculate_tsne()
 
         # 随机抽取显示文本, n为抽取的数量，show_sentence为一个列表，每个元素为显示文本的索引
-        show_sentence = self.random_sentence(n)
+        n_sentence = min(n_sentence, len(self.test_y))
+        show_sentence = self.random_sentence(n_sentence)
 
         # 格式化数据，输出为一个pandas的DataFrame，包含x, y, label, sentence, sentence_pos, size
         # x, y为降维后的坐标，label为类别，sentence为显示的文本，sentence_pos为文本的位置("left", "right")，size为被选中文本的大小
