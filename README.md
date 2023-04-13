@@ -102,6 +102,16 @@ TODO:
 我们通过这20对语料来向读者展示Embedding的特点。
 
 
++ TODO: 收集语料
+
++ TODO: 收集语料在大、小模型上的embedding
+
++ TODO: 补充结论段
+
+### 模糊问题搜索
+
+
+
 
 ## Report
 
