@@ -1,39 +1,16 @@
-import re
-import openai
-from IPython.display import Markdown, display
-import pandas as pd
 import numpy as np
+import pandas as pd
+from openTSNE import TSNE
+import plotly.graph_objs as go
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 from sklearn.decomposition import PCA
 from scipy.optimize import linear_sum_assignment
 
-from openTSNE import TSNE
-from datasets import load_dataset
-
-from sklearn.model_selection import train_test_split
-
-import matplotlib.pyplot as plt
-
-from tqdm import tqdm
-from sklearn.decomposition import PCA
-
-
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-
-import plotly.graph_objs as go
-
-from matplotlib.lines import Line2D
-
-from scipy.spatial.distance import pdist, squareform
-from networkx import Graph
-from networkx.algorithms.matching import max_weight_matching
-import networkx as nx
-
 class TSNE_Plot():
-    def __init__(self, sentence, embed, label = None, n_clusters :int = 3, HEIGHT:int = 800, n_annotation_positions:int = 20):
+    def __init__(self, sentence, embed, label = None, n_clusters :int = 3, n_annotation_positions:int = 20):
         assert n_clusters > 0, "N must be greater than 0" 
         self.N = n_clusters
-        self.HEIGHT = HEIGHT
         self.test_X = pd.DataFrame({"text": sentence, "embed": [np.array(i) for i in embed]})
         self.test_y = pd.DataFrame({'label':label}) if label is not None else pd.DataFrame({"label": self.cluster()})
         self.embed = self.calculate_tsne()
@@ -197,7 +174,7 @@ class TSNE_Plot():
         fig = go.Figure()
         fig = go.Figure(layout=go.Layout(
             autosize=False,  # 禁止图像自动调整大小
-            height=self.HEIGHT,  # 您可以根据需要调整这个值
+            height=800,  # 您可以根据需要调整这个值
             width=1500,  # 您可以根据需要调整这个值
             # plot_bgcolor="#262626",
         ))
