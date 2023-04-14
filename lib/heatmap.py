@@ -42,7 +42,7 @@ class Heatmap():
         sim_matrix = cosine_similarity(df['first_embed'].tolist(), df['second_embed'].tolist())
 
         # Load the specific font and font size.
-        font_default = ImageFont.truetype("arial.ttf", 14)
+        font_default = ImageFont.truetype("./arial.ttf", 14)
         
         jet_colorscale = [
             [0.0, "rgb(0, 0, 255)"],
