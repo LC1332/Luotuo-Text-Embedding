@@ -81,6 +81,8 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
     <img src="image/tSNEchallenge.png" height="350">
 </p>
 
+通过可视化看我们可以看到，OpenAI原论文的基本假设基本得到验证，即使是很写意的歌词，在中间切开，去除重复文本之后。前段歌词和后段歌词仍然能够呈现很强的相关性。（除了周杰伦的《爸 我回来了》，其他的）歌曲的前后段在特征空间中都很接近。
+
 <a name="sec-CSE"></a>
 
 ### 文本相关性测试
@@ -90,7 +92,7 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
 在OpenAI的论文(补充论文)中，使用了大量文本（补充数量）来进行自监督学习。其关键假设是，在切开的文本中，连续的两段长文本是相关的。
 
 <p align="center">
-    <img src="image/CSEvisual.png" height="350">
+    <img src="image/CSEcompare.png" height="350">
 </p>
 
 在这个测试中，我们使用一些训练数据(新闻数据)完全不覆盖的语料数据(中学语文课文和流行音乐歌词)，来进行测试。我们使用了如下的数据
