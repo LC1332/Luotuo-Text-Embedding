@@ -171,6 +171,10 @@ TODO:
 
 ## 赞助(Sponsorship) 骆驼项目
 
+在训练骆驼嵌入的时候，除了使用社区捐赠的经费购买的远程服务器外
+
+我们还使用了两周 **东吴证券** 捐赠的A100算力，在此表示感谢！
+
 如果你有兴趣赞助骆驼项目，请点击[主项目](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships)或者查看[赞助表单](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md)
 
 If you are interested in sponsoring the [Luotuo Project](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships), please click on the [major project](https://github.com/LC1332/Luotuo-Chinese-LLM) or view the [sponsorship form](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md).
