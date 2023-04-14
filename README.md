@@ -33,6 +33,8 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
     <img src="image/LuotuoEmbedding.png">
 </p>
 
+文本嵌入，是指将一段文本，转化为一定维度的向量（1536维），其中相近语义、相关主题的文本在向量空间更接近。拥有一个良好的文本嵌入特征，对于文本可视化、检索、聚类、内容审核等下游任务，有着重要的意义。
+
 + If you find this helpful, please star our major repo [Luotuo(骆驼)](https://github.com/LC1332/Luotuo-Chinese-LLM), Thanks Very Much
 
 + 如果你感到这个页面对你有帮助，拜托您去我们[骆驼的主页](https://github.com/LC1332/Luotuo-Chinese-LLM)也点上star，非常感谢！
