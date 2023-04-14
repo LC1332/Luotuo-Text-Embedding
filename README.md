@@ -4,14 +4,14 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
-骆驼嵌入是一个文本嵌入(text embedding)模型，由冷子昂, 刘思祎, 黄泓森, 陈舒年, 胡婧, 孙骜, 陈启源, 李鲁鲁等开发
+骆驼嵌入是一个文本嵌入(text embedding)模型，由冷子昂, 刘思诣, 黄泓森, 陈舒年, 胡婧, 孙骜, 陈启源, 李鲁鲁等开发
 
 <details>
   <summary> 每个作者都是第一作者，顺序是随机的。(点这里具体)</summary>
 
 李鲁鲁发起了项目，并完成了初步的验证，提出了KL散度Loss和Hard Negative挖掘。
 
-刘思祎完成了初步训练框架的编写，以及支撑了后面模型上传到hugging face管线。
+刘思诣完成了初步训练框架的编写，以及支撑了后面模型上传到hugging face管线。
 
 冷子昂完成了完整的大模型和小模型的训练，包括载入数据和损失函数的实现。
 
@@ -189,7 +189,7 @@ If you are interested in sponsoring the [Luotuo Project](https://github.com/LC13
 
 李鲁鲁发起了项目，并完成了初步的验证，提出了KL散度Loss和Hard Negative挖掘。
 
-刘思祎完成了初步训练框架的编写，以及支撑了后面模型上传到hugging face管线。
+刘思诣完成了初步训练框架的编写，以及支撑了后面模型上传到hugging face管线。
 
 冷子昂完成了完整的大模型和小模型的训练，包括载入数据和损失函数的实现。
 
