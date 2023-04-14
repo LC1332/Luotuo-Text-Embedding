@@ -159,6 +159,10 @@ TODO:
 
 ### GLM模型
 
+对于GLM模型，对于一个句子输入，我们获得Tokenizer后每一个input token在GLM的最后一层hidden vector，然后将这个vector通过全连接，依次输入了一个BERT。
+
+这些细节具体可以看我们正在编写的[报告](./report.md)
+
 <a name="data"></a>
 
 ## 数据
@@ -166,6 +170,8 @@ TODO:
 在骆驼嵌入的训练中，我们使用了234.5K的[CNewSum](https://dqwang122.github.io/projects/CNewSum/)数据。将新闻数据清理后，前后切开，并调用OpenAI的text-embedding-ada-002模型，得到了所有文本对的1536维数据。
 
 我们准备公开这批数据，正在研究CNewSum和OpenAI的数据协议，并且准备申请共享这批数据的表格和网站，之后就会释放这批数据。
+
+另外，将新闻数据训练得到的模型，应用在其他领域（比如修仙网文）可能会有一定的限制。最好再进一步加入对应domain的数据进行进一步的蒸馏训练。如果这方面您有确实的需求，也愿意覆盖数据和算力的费用，可以联系我们团队。（要是加入了部分额外domain数据的训练结果愿意公开给社区就更好了）
 
 <a name="sponsorship"></a>
 
