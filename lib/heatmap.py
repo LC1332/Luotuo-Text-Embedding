@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-from PIL import ImageFont
+from PIL import ImageFont, ImageColor
 from sklearn.metrics.pairwise import cosine_similarity
+from plotly.colors import find_intermediate_color
 
 class Heatmap():
     def __init__(self, df, positions = None):
@@ -11,9 +12,9 @@ class Heatmap():
     
     def get_bg_color(self, hex_color):
         red, green, blue = hex_color[0], hex_color[1], hex_color[2]
-        red_half = int(red) // 10 + (255 - 25)
-        green_half = int(green) // 10 + (255 - 25)
-        blue_half = int(blue) // 10 + (255 - 25)
+        red_half = int(float(red)) // 10 + (255 - 25)
+        green_half = int(float(green)) // 10 + (255 - 25)
+        blue_half = int(float(blue)) // 10 + (255 - 25)
 
         half_hex_color = "#{:02x}{:02x}{:02x}".format(red_half, green_half, blue_half)
         return half_hex_color
@@ -25,11 +26,29 @@ class Heatmap():
         return font.getsize(text)[0]
 
     def get_color_value(self, index, colorscale, min_value, max_value):
-        value_range = max_value - min_value
-        scaled_value = (index - min_value) / value_range
-        color_index = int(scaled_value * (len(colorscale) - 1))
-        return colorscale[color_index][1]
 
+        hex_to_rgb = lambda c: "rgb" + str(ImageColor.getcolor(c, "RGB"))
+        
+        # Normalize the data point to get a value between 0 and 1
+        normalized_value = (index - min_value) / (max_value - min_value)
+
+        for cutoff, color in colorscale:
+            if normalized_value > cutoff:
+                low_cutoff, low_color = cutoff, color
+            else:
+                high_cutoff, high_color = cutoff, color
+                break
+
+        if (low_color[0] == "#") or (high_color[0] == "#"):
+            low_color = hex_to_rgb(low_color)
+            high_color = hex_to_rgb(high_color)
+        intermediate_color = find_intermediate_color(
+            lowcolor=low_color,
+            highcolor=high_color,
+            intermed=((normalized_value - low_cutoff) / (high_cutoff - low_cutoff)),
+            colortype="rgb",
+        )
+        return intermediate_color
     def create_heatmap(self, positions = None, font_path = './arial.ttf'):
         if positions is None:
             positions = self.positions
@@ -44,21 +63,22 @@ class Heatmap():
         # Load the specific font and font size.
         font_default = ImageFont.truetype(font_path, 14)
         
-        jet_colorscale = [
-            [0.0, "rgb(0, 0, 255)"],
-            [0.1, "rgb(0, 100, 255)"],
-            [0.2, "rgb(0, 200, 255)"],
-            [0.3, "rgb(50, 255, 255)"],
-            [0.4, "rgb(150, 255, 255)"],
-            [0.5, "rgb(255, 255, 0)"],
-            [0.6, "rgb(255, 150, 0)"],
-            [0.7, "rgb(255, 100, 0)"],
-            [0.8, "rgb(255, 50, 0)"],
-            [0.9, "rgb(255, 0, 0)"],
-            [1.0, "rgb(150, 0, 0)"],
-        ]
-        
-        fig = go.Figure(data=go.Heatmap(z=sim_matrix, colorscale=jet_colorscale))
+        # jet_colorscale = [
+        #     [0.0, "rgb(0, 0, 255)"],
+        #     [0.1, "rgb(0, 100, 255)"],
+        #     [0.2, "rgb(0, 200, 255)"],
+        #     [0.3, "rgb(50, 255, 255)"],
+        #     [0.4, "rgb(150, 255, 255)"],
+        #     [0.5, "rgb(255, 255, 0)"],
+        #     [0.6, "rgb(255, 150, 0)"],
+        #     [0.7, "rgb(255, 100, 0)"],
+        #     [0.8, "rgb(255, 50, 0)"],
+        #     [0.9, "rgb(255, 0, 0)"],
+        #     [1.0, "rgb(150, 0, 0)"],
+        # ]
+
+        fig = go.Figure(data=go.Heatmap(z=sim_matrix, colorscale='Jet'))
+        jet_colorscale = fig.data[0].colorscale
         
         # Add annotations for captions
         annotations = []
@@ -71,7 +91,6 @@ class Heatmap():
             color_index = sim_matrix[row][col]
             color_value = self.get_color_value(color_index, jet_colorscale, min_value, max_value)
             position_colors[(col, row)] = color_value
-        
 
         title_row = go.layout.Annotation(
             text="Row",
@@ -105,8 +124,10 @@ class Heatmap():
             for j, position in enumerate([(-15, 1), (-30, 0)]):
                 text = self.show_text(df['first'][col] if j == 0 else df['second'][row])
                 color = position_colors[(col, row)]
-                hex_color = color.lstrip('rgb(').rstrip(')').split(", ")
+                hex_color = color.lstrip('rgb(').rstrip(')').split(",")
                 bgcolor = self.get_bg_color(hex_color)
+
+                # 文字
                 annotations.append(
                     go.layout.Annotation(
                         x=position[0],
@@ -125,6 +146,7 @@ class Heatmap():
                     )
                 )
                 if j == 0:
+                    #线
                     text_width = self.get_text_width(font_default, text) / 90
                     shapes.append(
                         go.layout.Shape(
@@ -137,7 +159,7 @@ class Heatmap():
                             xref='x',
                             line=dict(
                                 color=color,
-                                width=1.5,
+                                width=2,
                             )
                         )
                     )
