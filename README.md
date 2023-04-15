@@ -263,7 +263,7 @@ Please cite the repo if you use the data or code in this repo.
 
 + 之前NLP工作的可视化工具让我不是很满意，所以这里我们都给重写了，可视化这里主要是陈舒年实现的。
 
-+ 如果你发现这个embedding在你的应用领域work不是很好，但是openAI的API却还可以，那说明我们需要增加数据去覆盖您的领域，请及时联系我们。
++ 如果你发现这个embedding在你的应用领域work不是很好，但是openAI的API却还可以，那说明我们需要增加数据去覆盖您的领域，请及时联系我们。我们最终希望Luotuo-BERT是个能够给大家都用上的好的Text Embedding，大家不用花费力气自己去重训。
 
 + 对于QA来说，照理说要再做一个query——answer之间的转换函数，但是我估计这里用一个线性函数就够了
 
