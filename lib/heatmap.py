@@ -5,9 +5,9 @@ from PIL import ImageFont
 from sklearn.metrics.pairwise import cosine_similarity
 
 class Heatmap():
-    def __init__(self, df, positions):
+    def __init__(self, df, positions = None):
         self.df = df
-        self.positions = positions
+        self.positions = positions if positions != None else [(i, i) for i in range(len(df))]
     
     def get_bg_color(self, hex_color):
         red, green, blue = hex_color[0], hex_color[1], hex_color[2]
