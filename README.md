@@ -247,6 +247,7 @@ Please cite the repo if you use the data or code in this repo.
 - [x] 构建项目页面
 - [x] 发布小模型测试代码
 - [ ] 发布小模型colab测试代码
+- [ ] colab代码发布后，在骆驼主页更新链接
 - [ ] 替换相关性测试，数据改为网文-新闻数据
 - [ ] 模糊搜索 
 - [ ] 发布中模型
