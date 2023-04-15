@@ -120,12 +120,21 @@ TODO:换成网文新闻数据。
 
 #### 周杰伦挑战
 
-在周杰伦挑战中，我们对比了我们训练之前的基础模型，沈向洋老师IDEA团队的Tai-102M的BERT，以及我们训练后的Luotuo-BERT的结果，同时我们还展示了Hugging Face默认的BERT-base-Chinese模型的结果。
+在周杰伦挑战中，我们对比了我们训练之前的基础模型，沈向洋老师IDEA团队的Tai-102M的BERT，以及我们训练后的Luotuo-BERT的结果，同时我们还展示了Hugging Face默认的BERT-base-Chinese模型的结果。（更大BERT的结果将在周一放出）
 
 <p align="center">
     <img src="image/CSEcompare.png" height="350">
 </p>
 
+观察下图我们可以得出几个结论
+
+1. 相比于网文新闻测试，歌词测试要难得多。即使是人类来观察前后文本，也很难看出明显的相关性。
+
+2. 有一些同歌手、相近主题的歌曲，会出现分块相关的情况。
+
+3. 我们也对比了OpenAI的结果，通过蒸馏学习，我们的LuotuoBERT已经能够达到和OpenAI的API competitive的结果，所以我们后续考虑在KL散度Loss中，进一步加强对角先验，而不是单纯只考虑OpenAI的结构为目标概率。
+
+更多的对比结果我们将发布在我们正在编写的[报告](./report.md)中。
 
 <a name="sec-IR"></a>
 
