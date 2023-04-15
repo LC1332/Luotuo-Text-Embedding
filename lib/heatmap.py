@@ -5,10 +5,9 @@ from PIL import ImageFont
 from sklearn.metrics.pairwise import cosine_similarity
 
 class Heatmap():
-    def __init__(self, df, positions = None, font_path = './arial.ttf'):
+    def __init__(self, df, positions = None):
         self.df = df
         self.positions = positions if positions != None else [(i, i) for i in range(len(df))]
-        self.font_path = font_path
     
     def get_bg_color(self, hex_color):
         red, green, blue = hex_color[0], hex_color[1], hex_color[2]
@@ -31,7 +30,7 @@ class Heatmap():
         color_index = int(scaled_value * (len(colorscale) - 1))
         return colorscale[color_index][1]
 
-    def create_heatmap(self, positions = None):
+    def create_heatmap(self, positions = None, font_path = './arial.ttf'):
         if positions is None:
             positions = self.positions
         # check if there's no repeated rows in positions, which is the second column of the positions list
@@ -43,7 +42,7 @@ class Heatmap():
         sim_matrix = cosine_similarity(df['first_embed'].tolist(), df['second_embed'].tolist())
 
         # Load the specific font and font size.
-        font_default = ImageFont.truetype(self.font_path, 14)
+        font_default = ImageFont.truetype(font_path, 14)
         
         jet_colorscale = [
             [0.0, "rgb(0, 0, 255)"],
