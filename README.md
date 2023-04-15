@@ -45,14 +45,15 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
 
 小模型已经发布，中模型将在周一前后发布
 
+
 |  | Colab链接 | 细节 |
 | --- | --- | :--- |
-| 小模型 | - | BERT 110M带可视化验证的notebook |
-| 中模型 | - | BERT 352M带可视化验证的notebook |
-| 大模型 | - | GLM-Encoder模型带可视化验证的notebook |
-| 小模型Minimal | - | BERT 110M最简代码的notebook |
-| 小模型Minimal | - | BERT 352M最简代码的notebook |
-| 大模型Minimal | - | GLM-Encoder模型最简代码的notebook |
+| 小模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Visualization.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  | BERT 110M带可视化验证 |
+| 中模型 | - | BERT 352M带可视化验证 |
+| 大模型 | - | GLM-Encoder模型带可视化验证 |
+| 小模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  | BERT 110M最简代码 |
+| 小模型Minimal | - | BERT 352M最简代码 |
+| 大模型Minimal | - | GLM-Encoder模型最简代码 |
 
 
 <a name="application"></a>
@@ -416,7 +417,7 @@ query和base画对角线热图
 
 |  | Colab链接 | 细节 |
 | --- | --- | :--- |
-| 小模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT带可视化验证的notebook |
+| 小模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT带可视化验证的notebook |
 | 大模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型带可视化验证的notebook |
 | 小模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT最简代码的notebook |
 | 大模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Chinese-LLM/blob/main/notebook/TuoLingC_evaluation_code.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | GLM-Encoder模型最简代码的notebook |
