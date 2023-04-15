@@ -164,7 +164,7 @@ TODO:换成网文新闻数据。
 
 ### BERT模型
 
-对于BERT模型，我们增加了一个全连接层使得BERT的特征能够提升到1536维，并且使用沈向洋老师IDEA发布的中文CLIP模型为起点开始，进行训练，在所有数据上训练了总共5个Epoch。
+对于BERT模型，我们增加了一个全连接层使得BERT的特征能够提升到1536维，并且使用沈向洋老师IDEA发布的中文CLIP模型为起点开始，进行训练，在所有数据上训练了总共5个Epoch。我们周末先放的是102M的小模型，352M的应该周一周二就会放出来。
 
 ### GLM模型
 
@@ -194,6 +194,8 @@ TODO:换成网文新闻数据。
 
 If you are interested in sponsoring the [Luotuo Project](https://github.com/LC1332/Luotuo-Chinese-LLM#%E8%B5%9E%E5%8A%A9sponsorships), please click on the [major project](https://github.com/LC1332/Luotuo-Chinese-LLM) or view the [sponsorship form](https://github.com/LC1332/Luotuo-Chinese-LLM/blob/main/data/Sponsorship_and_balance.md).
 
+[回到开头](#BigTitle)
+
 <a name="contributor"></a>
 
 ## 人员
@@ -217,6 +219,8 @@ If you are interested in sponsoring the [Luotuo Project](https://github.com/LC13
 孙骜（即将）用我们的得到的Embedding，完成CoT的提升实验。
 
 胡婧收集了周杰伦的歌词，并（即将）完成更多的定量实验。
+
+[回到开头](#BigTitle)
 
 
 <a name="cite"></a>
@@ -249,6 +253,8 @@ Please cite the repo if you use the data or code in this repo.
 }
 ```
 
+[回到开头](#BigTitle)
+
 <a name="discussion"></a>
 
 ## 鲁叔的讨论
@@ -268,6 +274,8 @@ Please cite the repo if you use the data or code in this repo.
 + 对于QA来说，照理说要再做一个query——answer之间的转换函数，但是我估计这里用一个线性函数就够了
 
 + 因为这个工作的社区关注度不一定高，所以干脆后面测试补完之后写一篇arxiv吧，算是整个大项目第一篇arxiv了。
+
+[回到开头](#BigTitle)
 
 ---
 
@@ -298,6 +306,8 @@ Please cite the repo if you use the data or code in this repo.
 - [ ] 扩充domain数据，训练一个更好的大模型
 - [ ] 编写arxiv补充实验
 - [ ] 清洁并发布训练代码
+
+[回到开头](#BigTitle)
 
 ---
 
