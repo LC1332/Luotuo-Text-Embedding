@@ -1,6 +1,6 @@
 <a name="BigTitle"></a>
 
-English | [快速上手](#quickstart) | [Embedding应用](#application) | [数据](#data) | [赞助](#sponsorship) | [人员](#contributor) | [引用](#cite)
+English | [快速上手](#quickstart) | [Embedding应用](#application) | [数据](#data) | [赞助](#sponsorship) | [人员](#contributor) | [引用](#cite) | [鲁叔的讨论](#discussion)
 
 # Luotuo Embedding 骆驼嵌入: Generative Text Embedding Model distilled from OpenAI API
 
@@ -248,6 +248,16 @@ Please cite the repo if you use the data or code in this repo.
   howpublished = {\url{https://github.com/LC1332/Luotuo-Chinese-LLM}},
 }
 ```
+
+<a name="discussion"></a>
+
+## 鲁叔的讨论
+
++ Embedding是一个较为学术的工作思路。其实公众对于生成模型的生成语言结果讨论很多，但是对于Embedding的讨论却较少。
+
++ 但是其实大量应用，比如BingGPT或者ChatPDF，在构造的时候，都很需要Embedding的模型。所以必须要搭建一个
+
++ 我估计这个工作的关注度不一定会很高，但是对于整个社区确实是一个很重要的工作，所以值得去做。所以我们投入了很多人力和资源去做Embedding这么个工作，也在此向他们表示感谢。
 
 ---
 
