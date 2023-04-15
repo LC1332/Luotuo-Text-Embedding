@@ -62,20 +62,6 @@ class Heatmap():
 
         # Load the specific font and font size.
         font_default = ImageFont.truetype(font_path, 14)
-        
-        # jet_colorscale = [
-        #     [0.0, "rgb(0, 0, 255)"],
-        #     [0.1, "rgb(0, 100, 255)"],
-        #     [0.2, "rgb(0, 200, 255)"],
-        #     [0.3, "rgb(50, 255, 255)"],
-        #     [0.4, "rgb(150, 255, 255)"],
-        #     [0.5, "rgb(255, 255, 0)"],
-        #     [0.6, "rgb(255, 150, 0)"],
-        #     [0.7, "rgb(255, 100, 0)"],
-        #     [0.8, "rgb(255, 50, 0)"],
-        #     [0.9, "rgb(255, 0, 0)"],
-        #     [1.0, "rgb(150, 0, 0)"],
-        # ]
 
         fig = go.Figure(data=go.Heatmap(z=sim_matrix, colorscale='Jet'))
         jet_colorscale = fig.data[0].colorscale
