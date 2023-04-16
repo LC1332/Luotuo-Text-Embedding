@@ -189,7 +189,7 @@ class TSNE_Plot():
             fig.add_trace(go.Scatter(x=self.df[mask]['x'], y=self.df[mask]['y'], mode='markers', 
                                     marker=dict(color=color, size=self.df[mask]['size']),  # 添加 size 参数
                                     showlegend=True, legendgroup=line_legend_group,
-                                    name = "label " + str(label)) 
+                                    name = str(label)) 
                                     )
 
 
