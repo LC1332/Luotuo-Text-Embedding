@@ -141,13 +141,19 @@ TODO:换成网文新闻数据。
 
 ### 模糊问题搜索
 
-+ TODO
+<p align="center">
+    <img src="image/Textcluster.png" height="300">
+</p>
+
 
 <a name="sec-grouping"></a>
 
 ### 文本聚类
 
-+ TODO
+<p align="center">
+    <img src="image/Textcluster.png" height="300">
+</p>
+
 
 <a name="sec-classification"></a>
 
