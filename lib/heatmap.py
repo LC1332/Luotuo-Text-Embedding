@@ -150,8 +150,8 @@ class Heatmap():
                         )
                     )
         
-        custom_width = 70 * len(sim_matrix)  # Increase the multiplier (40) for larger cells
-        custom_height = 35 * len(sim_matrix)
+        custom_width = 1.8 * len(sim_matrix) * len(sim_matrix)  # Increase the multiplier (40) for larger cells
+        custom_height = 1 * len(sim_matrix) * len(sim_matrix)
 
         fig.update_layout(
             width=custom_width,
