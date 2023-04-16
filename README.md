@@ -142,7 +142,7 @@ TODO:换成网文新闻数据。
 ### 模糊问题搜索
 
 <p align="center">
-    <img src="image/Textcluster.png" height="300">
+    <img src="image/textSearch.png" height="300">
 </p>
 
 
