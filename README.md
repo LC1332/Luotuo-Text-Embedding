@@ -60,6 +60,8 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
 
 ## Embedding应用
 
+所有的应用例子都可以在colab链接 <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Visualization.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> 中体验。
+
 - [文本数据可视化](#sec-visual) 任意文本分类数据的可视化
 
 - [文本相关性测试](#sec-CSE) 周杰伦歌词之间的相关性测试。
@@ -106,8 +108,6 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
     <img src="image/CSEwithText.png" height="350">
 </p>
 
-TODO:换成网文新闻数据。
-
 #### 网文新闻测试
 
 我们对Luotuo-BERT在网文新闻30对的数据上进行了测试。我们额外编写了一个可视化，除了热图的展示，我们还抽样展示了热图中涉及数据的文本信息。可以看到
@@ -116,12 +116,16 @@ TODO:换成网文新闻数据。
 
 2. 由于我们的模型是在新闻上训练的，当前在新闻的表现上更好。
 
+3. 对于不同domain的文本，相关性矩阵会呈现分块对角的形式，甚至在不同类型的新闻，不同类型的网文之间，也有这样的特点。
+
 3. 根据我们的测试，当前的模型在其他domain的文本上，也能体现出良好的相关性。如果进一步补充其他领域的训练文本，可以使得这个特征有更好的不同领域的适应能力。
 
 
 #### 周杰伦挑战
 
 在周杰伦挑战中，我们对比了我们训练之前的基础模型，沈向洋老师IDEA团队的Tai-102M的BERT，以及我们训练后的Luotuo-BERT的结果，同时我们还展示了Hugging Face默认的BERT-base-Chinese模型的结果。（更大BERT的结果将在周一放出）
+
+周杰伦挑战的图见一开始tSNE可视化。
 
 <p align="center">
     <img src="image/CSEcompare.png" height="350">
@@ -141,18 +145,26 @@ TODO:换成网文新闻数据。
 
 ### 模糊问题搜索
 
+在我们的初步测试中，LuotuoBERT已经有很强的模糊文本搜索的能力。
+
 <p align="center">
     <img src="image/textSearch.png" height="300">
 </p>
 
+当然，一个更严肃的模糊搜索应该进一步建立Query特征到Answer文本的关联映射，并适当考虑传统关键词的技术。
 
 <a name="sec-grouping"></a>
 
 ### 文本聚类
 
+在不给定类别标签的时候，我们的可视化工具也会自动对文本进行聚类。
+
+
 <p align="center">
     <img src="image/Textcluster.png" height="300">
 </p>
+
+这是一个在新闻数据上进行聚类的展示。
 
 
 <a name="sec-classification"></a>
