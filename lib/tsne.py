@@ -169,7 +169,7 @@ class TSNE_Plot():
                     show_sentence.append(self.test_y[self.test_y["label"] == label_count.index[j]].index[0])
         self.show_sentence = list(set(show_sentence))
 
-    def plot(self):
+    def plot(self, return_fig=False):
         min_x, max_x = self.df['x'].min()-1, self.df['x'].max()+2
         fig = go.Figure()
         fig = go.Figure(layout=go.Layout(
@@ -229,9 +229,12 @@ class TSNE_Plot():
         fig.update_xaxes(tickvals=[])
         fig.update_yaxes(tickvals=[])
 
-        fig.show()
+        if not return_fig:
+            fig.show()
+        else:
+            return fig
     
-    def tsne_plot(self, n_sentence = 20):
+    def tsne_plot(self, n_sentence = 20, return_fig=False):
         # 计算t-SNE，返回降维后的数据，每个元素为一个二维向量
         embedding_train = self.calculate_tsne()
 
@@ -249,6 +252,8 @@ class TSNE_Plot():
         self.format_data()
         # self.df = self.df.sort_values('y').reset_index(drop=True)
 
-
-        # 绘制图像
-        self.plot()
+        if not return_fig:
+            # 绘制图像
+            self.plot()
+        else:
+            return self.plot(return_fig=return_fig)
