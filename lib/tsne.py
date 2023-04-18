@@ -8,6 +8,19 @@ from sklearn.decomposition import PCA
 from scipy.optimize import linear_sum_assignment
 
 class TSNE_Plot():
+    '''Class TSNE_Plot
+    Method
+    __init__
+        input:
+            sentence: List[string]
+                用于展示的语句，应当是一个字符串的list
+            embed: array
+                用于计算相似度的embedding，应当是np.array(float), 或者tensor(float)等可以直接进行矩阵乘法的array
+            label: [optional] List
+                用于标注不同颜色的label，
+    
+    '''
+
     def __init__(self, sentence, embed, label = None, n_clusters :int = 3, n_annotation_positions:int = 20):
         assert n_clusters > 0, "N must be greater than 0" 
         self.N = n_clusters

@@ -6,6 +6,24 @@ from sklearn.metrics.pairwise import cosine_similarity
 from plotly.colors import find_intermediate_color
 
 class Heatmap():
+    '''Class Heatmap
+    Method:
+    __init__:
+        input:
+            df:pandas dataframe
+                包含四列：first, second为两列字符串，分别对应一个pair中的第一句话和第二句话；first_embed, second_embed为两列向量，分别对应first和second语句的embedding
+            position: [optional] List[tuple]
+                包含需要展示语句的位置，默认为对角线位置格式为[(x1, y1), (x2, y2)]
+
+    creat_heatmap:
+        input:
+            position: [optional] List[tuple]
+                包含需要展示语句的位置，默认为对角线位置格式为[(x1, y1), (x2, y2)]
+            font_path: [optional] string
+                显示字体的路径，默认为'./arial.ttf'
+
+    '''
+
     def __init__(self, df, positions = None):
         self.df = df
         self.positions = positions if positions != None else [(i, i) for i in range(len(df))]
