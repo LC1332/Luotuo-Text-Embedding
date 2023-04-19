@@ -185,14 +185,21 @@ TODO:在这张图左边增加两个size的bert，形成a,b,c
     <img src="image/modelArch.jpg" height="350">
 </p>
 
+### 利用ChatGLM-6b对embedding初始化
+
+对于ChatGPT或者其他一些商业的使用最新语言模型的对话系统观察可以发现。在用户每次提交问题，或者Agent生成回答之后，系统才会进行内容审查。我们推测在这里，这些系统使用了和[OpenAIembedding论文]中一致的方法，即抽取大型语言模型的顶层hidden state，作为Encoder的输入来进行Embedding。显然这样做有几个好处: 1. 在一个工业化的架构中，利用大语言模型已经计算得到的隐层信息，可以节省很多运算 2. 大型语言模型已经在非常的语料上进行训练，可以有效增强模型的泛化能力。
+
+所以Following their work，我们将input_ids输入进ChatGLM-6b并取他最后一层的hidden states作为我们encoder的input。换言而之，我们抛弃了原生的embedding层，并使用GLM去生成embedding，然后把GLM生成的embedding作为encoder的input去训练，并在训练过程中freeze了GLM的参数。此举旨在利用GLM大的参数量和parametric knowledge去初始化一个较为好的embedding。我们希望这个embedding可以一定程度的保留GLM的知识，并基于它去继续学习。
+
+
 
 ### BERT作为Backbone
+
+
+
 大部分现有的embedding model都是使用Transformer Encoder architecture作为model的backbone（Bert，Roberta）。使用这种架构的好处在于bidirectional encoder能够掌握前后文的信息，从而更好的学习文字的表征。这篇工作同样使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。
 
 
-### 利用ChatGLM-6b对embedding初始化
-
-不同于之前的embedding model随机（或normal）初始化BERT的embedding layer，[OpenAIembedding论文]的工作提出了一种使用大语言模型初始化encoder的方法。Following their work，我们将input_ids输入进ChatGLM-6b并取他最后一层的hidden states作为我们encoder的input。换言而之，我们抛弃了原生的embedding层，并使用GLM去生成embedding，然后把GLM生成的embedding作为encoder的input去训练，并在训练过程中freeze了GLM的参数。此举旨在利用GLM大的参数量和parametric knowledge去初始化一个较为好的embedding。我们希望这个embedding可以一定程度的保留GLM的知识，并基于它去继续学习。
 
 
 
