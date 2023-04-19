@@ -76,17 +76,27 @@ A t-SNE visualization for proposed Embedding. Embedding有着多样化的下游�
 考虑到有很多的监督应用，我们这里主要展示了搜索、文本可视化，以及一个AutoCoT的应用。更多的下游应用我们计划在之后的版本进行补充。
 
 
-## 模型的训练
+## 损失函数的构造
 
-在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。本章节的组织如下，sec_loss_function 介绍了我们Loss的构造，sec_back_bone 介绍了我们使用的三种不同的模型大小。
+在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。
 
-TODO:在这张图左边增加两个size的bert，形成a,b,c
+从数学的角度来说，给定文本T1, T2，我们希望得到一个函数f()，如果T1和T2在文本中是相互连接的上下文关系，我们希望f(T1)和f(T2)在consine相似度上尽可能接近;反之，如果T1和T2来自不同的文本，我们希望f(T1)和f(T2)的consine相似度尽可能接近0。
 
-<p align="center">
-    <img src="image/modelArch.jpg" height="350">
-</p>
+
+TODO: 这里补一个图，解释3个loss
+
+| L1 | L2 | L3 |
+|---|---|---|
+| Distill Loss | KL Loss | margin loss |
+
+
+由于OpenAI已经提供了强特征的接口，即存在一个OpenAI提供的函数g()，已经能够让关联的文本g(T1)和g(T2)抽取得到的embedding特征，在特征空间上足够的近。所以我们考虑在使f(T1)和f(T2)尽可能接近的时候，也同时让f(T1) f(T2)与g(T1)，g(T2)分别对齐。这样做可能存在3个好处: 1. 因为OpenAI的特征已经有很强的监督信息，根据过往的模型蒸馏的报告，在一个较强的指导信息下，会使得f函数的收敛更快，并且在更小的数据上能够熟练。 2. 因为我们只使用了有限的语料，使用OpenAI额外的监督，可以看成引入了一个很强的topic模型，有助于增加小模型的泛化能力。 3.与OpenAI的Embedding对齐，可以有助于我们的模型对接很多已经在使用OpenAI Embedding API的应用。 在这里我们使用OpenAI的text-embedding-ada-002接口作为g函数，对于任意长度输入的文本，这个接口返回1536维的特征。
+
+对于上述的学习目标，我们设计了三个成分的损失函数，分别是蒸馏损失，KL散度损失和Margin损失。
 
 ### 损失函数的构造
+
+
 
 我们的损失函数由三项构成，Ldistill，LCSE。
 
@@ -116,6 +126,13 @@ KL(p_n* ||  q_n* ) = sum_i p_ni log(p_ni / q_ni )
 L_KL = 1/2n * sum_n ( KL(p_n* ||  q_n* )  + KL(p_*n ||  q_*n ) )
 
 在第一个版本中，我们先没有使用这个KL散度的实现，我们将在后续放出的模型中使用这个Loss。
+
+
+TODO:在这张图左边增加两个size的bert，形成a,b,c
+
+<p align="center">
+    <img src="image/modelArch.jpg" height="350">
+</p>
 
 
 ### BERT作为Backbone
