@@ -196,6 +196,13 @@ TODO:在这张图左边增加两个size的bert，形成a,b,c
 自BERT发布之后，有大量的NLP工作验证了其有效性。并且有非常多的推理架构，如Hugging Face，使得BERT可以被更方便地在各种场景进行应用。所以在小模型和中模型中，我们使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。在这里我们利用了IDEA发布的小模型和中模型作为预训练的权重[封神榜的论文]。
 
 
+## 更多细节
+
+### 训练集处理
+
+### 训练时长
+
+
 ## 实验
 
 
@@ -205,11 +212,13 @@ TODO:在这张图左边增加两个size的bert，形成a,b,c
 
 ### Q-A搜索
 
-### 与OpenAI以及其他Embedding模型的对比
+### 网文上的测试:在Out Domain上的定性对比1
+
+### 周杰伦挑战: 在Out Domain上的定性对比2
 
 ### 消融实验
 
-## 数据
-CNewSum
 
-## 结果
+## 结论和讨论
+
+
