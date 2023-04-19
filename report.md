@@ -177,18 +177,13 @@ L_Margin = max(0, M .* R - margin )
 
 ## 网络架构
 
-关于网络backbone的选取，我们的工作使用了3中不同规模的网络。
+关于网络backbone的选取，我们的工作使用了3中不同规模的网络。他们相同之处在于，最终文本的信息都会以序列的形式，结合Positional Encoding，输入到一个BERT的Encoder中，并输出1536维的特征。但是考虑到不同机器的显存大小，我们提供了三种不同大小的底层模型，分别是以一个大型的语言模型（以GLM-6B为例）的隐层作为输入，以一个300M左右的BERT作为backbone和一个100M左右的BERT作为backbone。
 
 TODO:在这张图左边增加两个size的bert，形成a,b,c
 
 <p align="center">
     <img src="image/modelArch.jpg" height="350">
 </p>
-
-
-
-
-
 
 
 ### BERT作为Backbone
