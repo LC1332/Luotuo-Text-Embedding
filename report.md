@@ -90,7 +90,7 @@ TODO: 这里补一个图，解释3个loss
 | Distill Loss | KL Loss | margin loss |
 
 
-由于OpenAI已经提供了强特征的接口，即存在一个OpenAI提供的函数g()，已经能够让关联的文本g(T1)和g(T2)抽取得到的embedding特征，在特征空间上足够的近。所以我们考虑在使f(T1)和f(T2)尽可能接近的时候，也同时让f(T1) f(T2)与g(T1)，g(T2)分别对齐。这样做可能存在3个好处: 1. 因为OpenAI的特征已经有很强的监督信息，根据过往的模型蒸馏的报告，在一个较强的指导信息下，会使得f函数的收敛更快，并且在更小的数据上能够熟练。 2. 因为我们只使用了有限的语料，使用OpenAI额外的监督，可以看成引入了一个很强的topic模型，有助于增加小模型的泛化能力。 3.与OpenAI的Embedding对齐，可以有助于我们的模型对接很多已经在使用OpenAI Embedding API的应用。 在这里我们使用OpenAI的text-embedding-ada-002接口作为g函数，对于任意长度输入的文本，这个接口返回1536维的特征。
+由于OpenAI已经提供了强特征的接口，即存在一个OpenAI提供的函数g()，已经能够让关联的文本g(T1)和g(T2)抽取得到的embedding特征，在特征空间上足够的近。所以我们考虑在使f(T1)和f(T2)尽可能接近的时候，也同时让f(T1) f(T2)与g(T1)，g(T2)分别对齐。这样做可能存在3个好处: 1. 因为OpenAI的特征已经有很强的监督信息，根据过往的模型蒸馏的报告，在一个较强的指导信息下，会使得f函数的收敛更快，并且在更小的数据上能够熟练。 2. 因为我们只使用了有限的语料，使用OpenAI额外的监督，可以看成引入了一个很强的topic模型，有助于增加小模型的泛化能力。 3.与OpenAI的Embedding对齐，可以有助于我们的模型对接很多已经在使用OpenAI Embedding API的应用。 在这里我们使用OpenAI的text-embedding-ada-002接口作为g函数，对于任意长度输入的文本，这个接口返回d = 1536维的特征。
 
 对于上述的学习目标，我们设计了三个成分的损失函数，分别是蒸馏损失，KL散度损失和Margin损失。
 
@@ -105,6 +105,30 @@ L = E_n \[  | f(T_n) - g(T_n) |_p \] + E_n \[ | f(U_n) - g(U_n) |_p \]
 在这里我们初步的实验使用了p=2的MSE损失函数，之后替换为了p=1的l1损失。如果有时间的话我们会补足一个关于p的消融实验。
 
 ### KL散度损失
+
+将整个Batch的 \{ T_n \}，都通过f函数或者g函数，会得到f(\{T_n\})和g(\{T_n\})，这些都是n * d的矩阵。同样我们也会得到 f(\{U_n\})和g(\{U_n\})。
+
+接下来我们需要对每一对数据，去求consine的相似度。这一步可以按照将f(\{T_n\}) 与 f(\{U_n\})每行都求l2归一化，然后再相乘得到。我们记这个结果为R
+
+R = l2_normalize( f(\{T_n\}) ) *  l2_normalize( f(\{U_n\}) )^T
+
+同样的，我们将g(\{T_n\})与g(\{U_n\})做相同的操作得到Q
+
+Q = l2_normalize( g(\{T_n\}) ) *  l2_normalize( g(\{U_n\}) )^T
+
+为了方便理解，图embed_compare_fig1 中的可视化就代表了不同模型的R矩阵，以及OpenAI接口得到的Q矩阵。
+
+在标准的自学习，如CLIP中，一般的方法会对R矩阵，按行和列，分别以对角线为ground truth，求cross entropy。这里我们直接引用CLIP论文中的伪代码:
+
+labels = np.arange(n)
+
+loss_i = cross_entropy_loss(R, labels, axis=0)
+
+loss_t = cross_entropy_loss(R, labels, axis=1)
+
+loss = (loss_i + loss_t)/2
+
+然而，这样直接的Cross Entropy会有一些缺点: 1. 2. 3.
 
 ### Margin损失
 
