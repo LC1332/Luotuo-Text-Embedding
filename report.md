@@ -30,10 +30,13 @@
 
 这些开源项目往往聚焦在文本生成，对于文本理解的处理，follow [GPT3的论文], 往往采用in-context-learning的形式。这是由于Decoder-based的语言模型，使用这种处理方式是更直接的，不需要额外的训练。不过，一方面在很多GPT3之后出现的应用中，很多开发者选择调用OpenAI的embedding接口，来进行语言理解的任务；另一方面，由于feature based的学习方法，能够使用更结构化的数据，并且使用更经典的机器学习架构，更便于传统文本理解研究者来使用。
 
-|这里|需要|一个图|
-|---|---|---|
-|OpenAI的相关矩阵|Bert的相关矩阵|我们的相关矩阵|
-| | | |
+
+TODO: 这里补充OpenAI的图在一起
+
+<p align="center">
+    <img src="image/CSEcompare.png" height="350">
+</p>
+
 
 + embed_compare_fig1 , 根据 [OpenAIembedding论文] 的假设，在文本中间切开，前半部分和后半部分的文本embedding应该出现较强的相关性。在这个初步的实验中，我们调用了 [字节的数据集] 中的100条数据，并且将其从最接近中间的句号切开，分别在三个模型上测试了前半部分文档和后半部分文档的Embedding的余弦相似度。 可以发现，在OpenAI的API接口中，文本的相关性得到了有效的体现，即使前文和后文没有太多的重复词汇，也能够在对角线上体现很高的相关性。而BERT，由于采用的是文本dropout训练的方式，对于文本前后文的关联，刻画没有那么好的描写。而我们的模型实现了接近OpenAI API的效果。
 
@@ -65,7 +68,7 @@
 + Text Embedding的下游应用
 
 <p align="center">
-    <img src="https://github.com/LC1332/Luotuo-Text-Embedding/blob/main/image/super_tSNE.png" alt="silk-magic-book" height="350">
+    <img src="image/tSNEchallenge.png" height="350">
 </p>
 
 A t-SNE visualization for proposed Embedding. Embedding有着多样化的下游应用，如数据可视化、聚类、搜索、分类等等。
@@ -76,6 +79,10 @@ A t-SNE visualization for proposed Embedding. Embedding有着多样化的下游�
 ## 模型的训练
 
 在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。本章节的组织如下，sec_loss_function 介绍了我们Loss的构造，
+
+<p align="center">
+    <img src="image/modelArch.jpg" height="350">
+</p>
 
 ### BERT作为Backbone
 大部分现有的embedding model都是使用Transformer Encoder architecture作为model的backbone（Bert，Roberta）。使用这种架构的好处在于bidirectional encoder能够掌握前后文的信息，从而更好的学习文字的表征。这篇工作同样使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。
