@@ -78,21 +78,13 @@ A t-SNE visualization for proposed Embedding. Embedding有着多样化的下游�
 
 ## 模型的训练
 
-在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。本章节的组织如下，sec_loss_function 介绍了我们Loss的构造，
+在本来[OpenAIembedding论文]的工作中，使用了[多少数据]规模的语料。而在我们的工作中，为了在更可支付的计算资源下得到模型，我们希望考虑在单卡A100的情况下，能够在7天级别内训练得到的模型。因此我们考虑了对OpenAI的[embedding模型名字]模型的输出进行蒸馏。本章节的组织如下，sec_loss_function 介绍了我们Loss的构造，sec_back_bone 介绍了我们使用的三种不同的模型大小。
+
+TODO:在这张图左边增加两个size的bert，形成a,b,c
 
 <p align="center">
     <img src="image/modelArch.jpg" height="350">
 </p>
-
-### BERT作为Backbone
-大部分现有的embedding model都是使用Transformer Encoder architecture作为model的backbone（Bert，Roberta）。使用这种架构的好处在于bidirectional encoder能够掌握前后文的信息，从而更好的学习文字的表征。这篇工作同样使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。
-
-
-### 利用ChatGLM-6b对embedding初始化
-
-不同于之前的embedding model随机（或normal）初始化BERT的embedding layer，[OpenAIembedding论文]的工作提出了一种使用大语言模型初始化encoder的方法。Following their work，我们将input_ids输入进ChatGLM-6b并取他最后一层的hidden states作为我们encoder的input。换言而之，我们抛弃了原生的embedding层，并使用GLM去生成embedding，然后把GLM生成的embedding作为encoder的input去训练，并在训练过程中freeze了GLM的参数。此举旨在利用GLM大的参数量和parametric knowledge去初始化一个较为好的embedding。我们希望这个embedding可以一定程度的保留GLM的知识，并基于它去继续学习。
-
-
 
 ### 损失函数的构造
 
@@ -124,6 +116,19 @@ KL(p_n* ||  q_n* ) = sum_i p_ni log(p_ni / q_ni )
 L_KL = 1/2n * sum_n ( KL(p_n* ||  q_n* )  + KL(p_*n ||  q_*n ) )
 
 在第一个版本中，我们先没有使用这个KL散度的实现，我们将在后续放出的模型中使用这个Loss。
+
+
+### BERT作为Backbone
+大部分现有的embedding model都是使用Transformer Encoder architecture作为model的backbone（Bert，Roberta）。使用这种架构的好处在于bidirectional encoder能够掌握前后文的信息，从而更好的学习文字的表征。这篇工作同样使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。
+
+
+### 利用ChatGLM-6b对embedding初始化
+
+不同于之前的embedding model随机（或normal）初始化BERT的embedding layer，[OpenAIembedding论文]的工作提出了一种使用大语言模型初始化encoder的方法。Following their work，我们将input_ids输入进ChatGLM-6b并取他最后一层的hidden states作为我们encoder的input。换言而之，我们抛弃了原生的embedding层，并使用GLM去生成embedding，然后把GLM生成的embedding作为encoder的input去训练，并在训练过程中freeze了GLM的参数。此举旨在利用GLM大的参数量和parametric knowledge去初始化一个较为好的embedding。我们希望这个embedding可以一定程度的保留GLM的知识，并基于它去继续学习。
+
+
+
+
 
 
 
