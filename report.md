@@ -158,8 +158,22 @@ L_KL = L_KL0 + L_KL1
 
 ### Margin损失
 
+在中等模型以上的模型时我们发现以一个现象，无论使用Cross Entropy Loss还是KL散度Loss，R矩阵会随着训练的轮次不断增大。这个现象在过往的CLIP等论文中并没有相关的报告。我们怀疑时由于Distill Loss和KL散度Loss发生了一定的相互作用，产生了过拟合。
+
+对于Cross Entropy损失来说，如果在R矩阵上增加一个常数 R' = R + c，并不会改变Cross Entropy的数值。而对于KL散度loss，R' = R +c也不会产生很大的影响。我们怀疑前两个loss的相互作用使得R在不断增大。我们在一开始实验了 ArcFace2中的一个技巧，在R上面乘以一个scale系数，即 P = softmax( beta R )来试图消除这个现象，但是并没有起到明显的效果。
+
+由此，我们引入一个Masked Margin Loss，这个损失函数在过往的很多度量学习的工作中非常常见
+
+L_Margin = max(0, M .* R - margin )
+
+其中M = ones(n,n) - I， 是一个除了对角线是0，其他元素都是1的矩阵。 margin是一个0.5左右的系数。
+
+
 ### Hard Negative挖掘
 
+根据过往的一些研究，类似CLIP这样的损失函数，会使得网络学习的任务过于简单。
+
+我们考虑在后续的模型中，加入Hard Negative Mining。对于每个Epoch的训练，我们首先选取一个当前没有被选过的样本，并且抽取n个与其语义最近的样本，进行训练。这样可以增加训练时候整个问题的难度。
 
 ## 网络架构
 
