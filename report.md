@@ -104,19 +104,16 @@ L = E_n \[  | f(T_n) - g(T_n) |_p \] + E_n \[ | f(U_n) - g(U_n) |_p \]
 
 在这里我们初步的实验使用了p=2的MSE损失函数，之后替换为了p=1的l1损失。如果有时间的话我们会补足一个关于p的消融实验。
 
-### 损失函数的构造
+### KL散度损失
+
+### Margin损失
+
+### Hard Negative挖掘
 
 
-
-我们的损失函数由三项构成，Ldistill，LCSE。
-
+## 网络架构
 
 
-+ Distill Loss
-
-+ Weighted In-batch Contrastive Loss
-
-这个loss基于标准的contrastive learning。每一个input instance是一对相似的文本sent_1, sent_2。然后在一个batch_size=N 的batch中，sent_1 与sent_2作为一个positive example，然后sent_1 与batch内的其他任意文本作为negative example，以此类推。最后的loss是加权过后的每一个sent_i与batch内其他文本的cross_entropy的总和。
 
 
 ### HardNegative Mining与KL散度Loss
