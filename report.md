@@ -112,11 +112,11 @@ L = E_n \[  | f(T_n) - g(T_n) |_p \] + E_n \[ | f(U_n) - g(U_n) |_p \]
 
 R = l2_normalize( f(\{T_n\}) ) *  l2_normalize( f(\{U_n\}) )^T
 
-同样的，我们将g(\{T_n\})与g(\{U_n\})做相同的操作得到Q
+同样的，我们将g(\{T_n\})与g(\{U_n\})做相同的操作得到S
 
-Q = l2_normalize( g(\{T_n\}) ) *  l2_normalize( g(\{U_n\}) )^T
+S = l2_normalize( g(\{T_n\}) ) *  l2_normalize( g(\{U_n\}) )^T
 
-为了方便理解，图embed_compare_fig1 中的可视化就代表了不同模型的R矩阵，以及OpenAI接口得到的Q矩阵。
+为了方便理解，图embed_compare_fig1 中的可视化就代表了不同模型的R矩阵，以及OpenAI接口得到的S矩阵。
 
 在标准的自学习，如CLIP中，一般的方法会对R矩阵，按行和列，分别以对角线为ground truth，求cross entropy。这里我们直接引用CLIP论文中的伪代码:
 
@@ -128,7 +128,30 @@ loss_t = cross_entropy_loss(R, labels, axis=1)
 
 loss = (loss_i + loss_t)/2
 
-然而，这样直接的Cross Entropy会有一些缺点: 1. 2. 3.
+然而，这样直接的Cross Entropy会有一些缺点: 1. 这样的Cross Entropy损失函数，并没有使用已经训练良好的OpenAI的Embedding的S信息。 2. 在实际的数据中，有些切开的T_n和U_n不一定有很强的关联。 3. 有很多其他自学习的研究表示，有可能会出现T_i和U_j的关联很强，在自学习的时候最好能考虑到这些信息。
+
+由此，我们修改了这个损失函数，将其改为KL散度损失，使其能够更好的利用上Q的信息，并且也能够在之后适配我们的Hard Negative Mining。对于R和S，我们希望通过按行和按列，取SoftMax，得到一个归一化的概率矩阵,P和Q。然后对他们按行/列，去计算KL散度。
+
+P = softmax(R, axis = 0)
+
+Q = softmax(S, axis = 0)
+
+KL(p_n* ||  q_n* ) = sum_i p_ni log(p_ni / q_ni )
+
+L_KL0 = E_n \[ KL(p_n* ||  q_n* ) \]
+
+P = softmax(R, axis = 1)
+
+Q = softmax(S, axis = 1)
+
+L_KL1 = E_n \[ KL(p_n* ||  q_n* ) \]
+
+L_KL = L_KL0 + L_KL1
+
+注意到这样的损失函数有几个优点: 1. 2. 3.
+
+在后续的训练中
+
 
 ### Margin损失
 
