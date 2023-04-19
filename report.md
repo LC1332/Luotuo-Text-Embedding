@@ -191,23 +191,23 @@ TODO:在这张图左边增加两个size的bert，形成a,b,c
 
 所以Following their work，我们将input_ids输入进ChatGLM-6b并取他最后一层的hidden states作为我们encoder的input。换言而之，我们抛弃了原生的embedding层，并使用GLM去生成embedding，然后把GLM生成的embedding作为encoder的input去训练，并在训练过程中freeze了GLM的参数。此举旨在利用GLM大的参数量和parametric knowledge去初始化一个较为好的embedding。我们希望这个embedding可以一定程度的保留GLM的知识，并基于它去继续学习。
 
-
-
 ### BERT作为Backbone
 
+自BERT发布之后，有大量的NLP工作验证了其有效性。并且有非常多的推理架构，如Hugging Face，使得BERT可以被更方便地在各种场景进行应用。所以在小模型和中模型中，我们使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。在这里我们利用了IDEA发布的小模型和中模型作为预训练的权重[封神榜的论文]。
 
 
-大部分现有的embedding model都是使用Transformer Encoder architecture作为model的backbone（Bert，Roberta）。使用这种架构的好处在于bidirectional encoder能够掌握前后文的信息，从而更好的学习文字的表征。这篇工作同样使用BERT模型作为我们embedding model的backbone。任意一段文本被输入进BERT模型后，会先被BertTokenizer tokenize成input_ids，然后放入embedding层使它向量化，然后通过encoder学习他的表征，最后使用encoder最后一层的[CLS]的hidden states作为这段文本的表征。
+## 实验
 
 
+### Embedding标准测试1
 
+### Embedding标准测试2
 
+### Q-A搜索
 
+### 与OpenAI以及其他Embedding模型的对比
 
-
-
-
-### 训练的细节
+### 消融实验
 
 ## 数据
 CNewSum
