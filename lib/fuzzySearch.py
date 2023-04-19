@@ -12,10 +12,30 @@ from transformers import AutoModel, AutoTokenizer
 from argparse import Namespace
 
 class FuzzySearch():
+    '''Class FuzzySearch
+    Method
+        __init__
+            input:
+                data: pandas.DataFrame
+                    包含sentence和embed两列，其中sentence为string，embed为float列表
+                openaiAPIKey: [optional] string
+                    如果要使用openai embedding模型计算用户query embedding，则需要提供openai api key
+                source: [optional] string in ["openai", "local"]
+                    如果使用openai，将调用openai embedding api计算用户query的embedding，如果使用local，则调用model指定的模型计算用户query的embedding
+                model: [optional] string
+                    指定用于计算用户query embedding的模型，默认为"silk-road/luotuo-bert"
+                stop_words_path: [optional] string
+                    指定stop words
+        search
+            input: 
+                openaiAPIKey: [optional] string
+                    如果要使用openai embedding模型计算用户query embedding，则需要提供openai api key
+                source: [optional] string in ["openai", "local"]
+                    如果使用openai，将调用openai embedding api计算用户query的embedding，如果使用local，则调用model指定的模型计算用户query的embedding
+
+        '''
     def __init__(self, data, openaiAPIKey = None, source = "local", model = "silk-road/luotuo-bert", stop_words_path = "../data/stop_word.txt"):
-        '''
-        data: pandas.DataFrame, 包含sentence和embed两列
-        '''
+        
         self.data = data
         self.openaiAPIKey = openaiAPIKey
         self.source = source

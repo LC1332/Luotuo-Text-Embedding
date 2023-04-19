@@ -17,7 +17,20 @@ class TSNE_Plot():
             embed: array
                 用于计算相似度的embedding，应当是np.array(float), 或者tensor(float)等可以直接进行矩阵乘法的array
             label: [optional] List
-                用于标注不同颜色的label，
+                用于标注不同颜色的label，应当是一个list，对应每个sentence的label。如果没有提供label，将会自动调用聚类算法对sentence进行分类，默认的类别为3类
+            n_clusters: [optional] int
+                用于聚类算法的类别数量
+            n_annotation_posisions: [optional] int
+                展示的语句总数，默认为20句
+    tsne_plot
+        input:
+            n_annotation_posisions: [optional] int
+                展示的语句总数，默认为20句
+            return_fig: [optional] boolean
+                是否返回图像对象，如果为False，将直接绘制图像，如果为True，将返回图像对象，默认为False
+        Output:
+            若return_fig为True，将返回图像对象
+
     
     '''
 
