@@ -177,33 +177,18 @@ L_Margin = max(0, M .* R - margin )
 
 ## 网络架构
 
-
-
-
-### HardNegative Mining与KL散度Loss
-
-在很多关于自学习的中提到[陈启源找一下文献]，仅仅使用简单的Contrastive Learning，对于负样本的学习太过于简单。在文本的Embedding训练中我们可以这样理解，如果两个文本中出现了一些完全topic完全不相关的单词，就很容易让两个文本去区分开。因此，[陈启源找一下文献]考虑在自相关学习中引入Hard Negative Mining的手段。
-
-当然，有很多时候，多个文本语料可能是直接相关的，所以当我们把Hard Negative的样本放在一起的时候，很多Pesudo的Negative样本并不是真正的负样本，如果再使用之前提到的CSE损失函数学习，很容易出现Overfitting。
-
-这个时候，结合OpenAI的输出，我们使用一个KL散度作为Loss，具体来说，在训练的时候，我们试图将Hard Negative尽可能抽样在一起。然后对于一个Batch，如果OpenAI得到的相似度矩阵是P，模型当前得到的矩阵是Q，对于这两个矩阵的第n行，p_n和q_n，我们求KL散度
-
-KL(p_n* ||  q_n* ) = sum_i p_ni log(p_ni / q_ni )
-
-当然，对于列我们也求KL散度，用KL(p_*n ||  q_*n )来表示。
-
-最后，我们将每一列和每一行的KL散度求平均，得到了KL散度Loss
-
-L_KL = 1/2n * sum_n ( KL(p_n* ||  q_n* )  + KL(p_*n ||  q_*n ) )
-
-在第一个版本中，我们先没有使用这个KL散度的实现，我们将在后续放出的模型中使用这个Loss。
-
+关于网络backbone的选取，我们的工作使用了3中不同规模的网络。
 
 TODO:在这张图左边增加两个size的bert，形成a,b,c
 
 <p align="center">
     <img src="image/modelArch.jpg" height="350">
 </p>
+
+
+
+
+
 
 
 ### BERT作为Backbone
