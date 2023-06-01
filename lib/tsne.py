@@ -175,25 +175,32 @@ class TSNE_Plot():
         embedding_train = tsne.fit(compact_embedding)
         embedding_train = embedding_train.optimize(n_iter=1000, momentum=0.8)
         return embedding_train
+    
+    def idx_list_dict(self, df):
+        def get_idx(group):
+            return group.index.tolist()
+        group = df.groupby("label")
+        return_dict = group.apply(get_idx).to_dict()
+        return return_dict
 
     def random_sentence(self):
-        #多次随机可能会影响可视化结果
-        n_samples = len(self.test_y)
+        #汇总所有标签的句子索引
+        idx_dict = self.idx_list_dict(self.test_y)
 
+        m = len(self.test_y)
+        n = min(self.n_annotation_positions, m)
+
+        #从每个标签中随机抽取一个句子
         show_sentence = []
-        while len(show_sentence) < self.n_annotation_positions:
-            show_sentence.append(np.random.randint(0, n_samples))
-            show_sentence = list(set(show_sentence))
+        while n > 0:
+            for l, lst in idx_dict.items():
+                show_sentence.append(lst.pop(np.random.choice(len(lst), 1, replace=False)[0]))
+                n -= 1
+                if n == 0:
+                    break
 
-        # 确保每个标签至少有一个句子，用在show_sentence中最多的标签的句子来补充
-        label_count = self.test_y["label"].value_counts()
-        max_label = label_count.index[0]
-        max_count = label_count[0]
-        for i in range(max_count):
-            for j in range(len(label_count)):
-                if label_count[j] == i:
-                    show_sentence.append(self.test_y[self.test_y["label"] == label_count.index[j]].index[0])
-        self.show_sentence = list(set(show_sentence))
+        self.show_sentence = show_sentence
+
 
     def plot(self, return_fig=False):
         min_x, max_x = self.df['x'].min()-1, self.df['x'].max()+2
