@@ -52,8 +52,9 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
 | 中模型 | - | BERT 352M带可视化验证 |
 | 大模型 | - | GLM-Encoder模型带可视化验证 |
 | 小模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  | BERT 110M最简代码 |
-| 小模型Minimal | - | BERT 352M最简代码 |
+| 中模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Medium_Embedding_Demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT 352M最简代码 |
 | 大模型Minimal | - | GLM-Encoder模型最简代码 |
+
 
 
 <a name="application"></a>
