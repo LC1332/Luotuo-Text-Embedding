@@ -43,13 +43,12 @@ English | [快速上手](#quickstart) | [Embedding应用](#application) | [数�
 
 ## 快速上手
 
-小模型已经发布，中模型将在周一前后发布
-
+中模型已经发布，大模型将看后面什么时候有空再发布。
 
 |  | Colab链接 | 细节 |
 | --- | --- | :--- |
 | 小模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Visualization.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  | BERT 110M带可视化验证 |
-| 中模型 | - | BERT 352M带可视化验证 |
+| 中模型 | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Visualization_Medium.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  | BERT 352M带可视化验证 |
 | 大模型 | - | GLM-Encoder模型带可视化验证 |
 | 小模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Embedding_Demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>  | BERT 110M最简代码 |
 | 中模型Minimal | <a href="https://colab.research.google.com/github/LC1332/Luotuo-Text-Embedding/blob/main/notebook/Luotuo_Medium_Embedding_Demo.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> | BERT 352M最简代码 |
