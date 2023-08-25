@@ -323,7 +323,7 @@ polish the paragraph in ACL, ICML, Science's language style:
 
 ## 实验
 
-实验的介绍
+实验的介绍分为下面几个部分。首先我们会先给出两个out-domain的测试，验证在使用训练集之外的数据的情况下，luotuo-bert是否能够有效抽取出文本之间的相关性。事实上在这两个定性实验完成后，我们就陆续将luotuo-bert用在luotuo项目的一系列后续子项目中。之后的实验环节，将会介绍2023年夏天发布的M3E和BGE对luotuo-bert的测评。这些实验验证了我们提出的luotuo-bert和OpenAI在很多任务上是comeptitive的。在最后一个环节，我们会给出一个跨语言的QA实验。
 
 ### 定性实验-相关性测试
 
@@ -385,7 +385,6 @@ polish the paragraph in ACL, ICML, Science's language style:
 </p>
 
 通过可视化看我们可以看到，OpenAI原论文的基本假设基本得到验证，即使是很写意的歌词，在中间切开，去除重复文本之后。前段歌词和后段歌词仍然能够呈现很强的相关性。（除了周杰伦的《外婆》，其他的）歌曲的前后段在特征空间中都很接近。
-
 
 
 ### 定量实验
