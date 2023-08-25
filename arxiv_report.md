@@ -123,6 +123,93 @@ We found that solely optimizing the $l_1$ distillation and self-correlation loss
 Per prior work shows contrastive losses like CLIP can lead to models learning an overly simple task. We considered incorporating hard negative mining into future models, where for each epoch, we first sample an unused example and retrieve its n most semantically similar instances for training. This increases the difficulty throughout training. For each batch, we could randomly sample a sentence and find not-yet-seen sentences with the most similar embeddings to form a batch, ensuring challenging negatives are present. However, we found this search inefficient to implement and did not utilize this strategy.
 
 
+### BERT as Backbone
+
+Since its release, BERT has been widely adopted in NLP, with many inference architectures like Hugging Face enabling easy BERT integration across applications. Thus, our small and medium models use BERT as the backbone for embedding text. For any input text, BERT first tokenizes via BertTokenizer into input_ids, then maps these to embeddings, passes them through the encoder to obtain representations, and finally uses the [CLS] token's last encoder layer hidden state as the text embedding. We leverage IdeaLab's released small and medium pretrained models [Feng Shen Bang paper] as initialization. 
+
+### Initializing with ChatGPT-6B Embeddings 
+
+In conversational systems utilizing large language models like ChatGPT, we observe that content moderation happens after users submit questions or agents generate responses. Presumably, these systems follow [OpenAI embedding paper]'s approach of extracting top LM hidden states as input to the encoder for embedding, which has advantages: 1) In production, reusing computed LM hidden states saves computation. 2) Large pretrained LMs encode strong generalization. However, given the release of many large embedding models since April 2023, we ultimately did not train with this approach.
+
+
+## Experiments
+
+We evaluate our proposed method, luotuo-BERT, on two out-of-domain tests to verify its ability to extract text relevance without using the training data. In fact, after completing these two qualitative experiments, we have applied luotuo-BERT to a series of follow-up subprojects under the luotuo project. The subsequent experiments will present the evaluations of luotuo-BERT by M3E and BGE released in the summer of 2023. These experiments validate that our proposed luotuo-BERT is competitive with OpenAI on many tasks. In the final part, we provide a cross-lingual QA experiment.  
+
+### Qualitative Experiments - Relevance Test
+
+In the OpenAI paper [add citation], a large amount of text (add quantity) is used for self-supervised learning. The key assumption is that contiguous segments of long text are related when split. In this application, we verify this assumption on two tests. Since our current model version is trained on news data, we want to find two batches of text from different domains to validate the model's capability.
+
++ Web text news data: We take 15 web texts and add 15 news outside of the dataset. We look for long paragraphs in the texts and split them into previous and next segments. To increase the difficulty, we avoid excessive overlapping words when splitting the web text data.
+
++ Jay Chou challenge: Since there are some repetitive words in previous and next segments of news data, and the coherence of web texts is quite strong. We want to make a harder challenge. We take 3 middle school textbooks, 2 web texts, 5 Faye Wong's songs, and 8 Jay Chou's songs with different content. In this challenge, we manually remove repetitive short phrases (e.g. choruses) and avoid repetitive words across splitted segments. 
+
+Below are the splitted previous and next lyrics from "Indian Old Ground Dove", a narrative acid jazz song from Jay Chou's first album:
+
+```
+First half: How could there be loaches in the desert A seagull flew by saying Wind howling in the Grand Canyon Who said there isn't A hot-headed rattlesnake Lying powerless in the dried-up river Waiting for the rainy season to turn into a marsh Gray wolves gnawing on deer bones Vultures hovering staring at rotten meat Two bison on the grassland Dueling in the distance  
+
+Second half: On an abandoned termite mound Stands a hungry old ground dove Indian old ground dove Short fur and short legs Can live for days without water A bit of a silly head Saddest when its prey dies Indian old ground dove Can talk like humans Cactus shy Walking lizards Here everything strange happens Including cat-like dogs
+```
+
+Here is the paragraph polished in ACL/ICML/Science style:
+
+#### Web Text News Test
+
+We tested Luotuo-BERT on 30 pairs of web text news data. We additionally implemented a visualization that not only shows the heatmap but also samples text information involved in the heatmap. We can see that:
+
+1. The assumption in the OpenAI paper is largely verified. Namely, the previous and next segments of a text exhibit strong relevance. 
+
+2. Since our model is trained on news, it currently performs better on news.
+
+3. For texts from different domains, the relevance matrix shows a block-diagonal form. Even between different types of news and web texts, this characteristic exists.
+
+3. According to our test, the current model can also reflect good relevance on texts from other domains. Further supplementing training texts from other domains can improve the model's adaptability to different domains.
+
+
+#### Jay Chou Challenge
+
+In the Jay Chou challenge, we compared the results of our baseline model before training, IDEA's Tai-102M BERT, and our trained Luotuo-BERT. We also present the results of Hugging Face's default BERT-base-Chinese. (Results of larger BERTs will be released on Monday)
+
+See the tSNE visualization for the Jay Chou challenge.
+
+
+Observing the figure below, we can draw several conclusions:
+
+1. Compared to the web text news test, the lyrics test is much more difficult. Even for humans to observe the previous and next texts, it is hard to discern obvious relevance. 
+
+2. For songs by the same singer or similar themes, we can see block-wise correlations. 
+
+3. We also compared with OpenAI's results. Through distillation learning, our LuotuoBERT has achieved competitive results with OpenAI's API. Hence, we consider further strengthening the diagonal prior in the KL divergence loss, instead of simply taking OpenAI's structure as the target probability.
+
+### Qualitative Experiments - Visualization and Clustering
+
+For any multi-class data, we have prepared a t-SNE visualization code around our released embedding model, which can display categories on a 2D plane and sample partial text content. You can directly run and experience it in the large model link / small model link. 
+
+<p align="center">
+  <img src="image/tSNEchallenge.png" height="350"> 
+</p>
+
+From the visualization we can see that the basic assumption in OpenAI's original paper is largely verified. Even for impromptu lyrics, after cutting them in the middle and removing repetitive text, the previous and next segments of lyrics can still exhibit strong relevance. The previous and next segments of songs remain close in the feature space.
+
+
+### Quantitative Experiments 
+
+After releasing our model, the m3e report selected 6 text classification datasets. Similar to MTEB, the accuracy of different models was reported. In the BGE report, more tasks were tested. We can see that our embedding achieves comparable performance to OpenAI's text-embedding-ada-002 on various tasks. Considering the report in [neelakantan2022text] that OpenAI's embedding uses a batch size up to 12k and trains over 30,000 steps, we only used a 128 batch size (32 per A100) and trained for less than 2,000 steps on 200k scale data. The computational resources required by our approach are much less than OpenAI's.
+
+### Cross-Lingual Search
+
+Notably, since OpenAI's text-embedding-ada-002 supports many languages, we can align embeddings cross languages. 
+
+Here we demonstrate a cross-lingual QA example. After building the database in Chinese/English, we query in the other language to see if we can search and answer the question correctly. We qualitatively compared several cross-lingual embedding models between Chinese and English.
+
+
+@article{neelakantan2022text,
+  title={Text and code embeddings by contrastive pre-training},
+  author={Neelakantan, Arvind and Xu, Tao and Puri, Raul and Radford, Alec and Han, Jesse Michael and Tworek, Jerry and Yuan, Qiming and Tezak, Nikolas and Kim, Jong Wook and Hallacy, Chris and others},
+  journal={arXiv preprint arXiv:2201.10005},
+  year={2022}
+}
 
 
 
@@ -309,7 +396,6 @@ $L_Margin = max(0, M .* R - margin )$
 根据过往的一些研究，类似CLIP这样的损失函数，会使得网络学习的任务过于简单。我们考虑在后续的模型中，加入Hard Negative Mining。对于每个Epoch的训练，我们首先选取一个当前没有被选过的样本，并且抽取n个与其语义最近的样本，进行训练。这样可以增加训练时候整个问题的难度。对于每个batch，可以随机选取一个句子，然后从这个epoch还没有出现的句子中，寻找当前embedding较为接近的样本一同组合组成一个batch。这样可以保证较难的负样本可以被放置在一个batch中。不过在实现后我们发现这样搜索的效率并不高。所以没有使用这个策略。
 
 
-polish the paragraph in ACL, ICML, Science's language style:
 
 
 ### BERT作为Backbone
@@ -320,6 +406,8 @@ polish the paragraph in ACL, ICML, Science's language style:
 ### 利用ChatGLM-6b对embedding初始化
 
 对于ChatGPT或者其他一些商业的使用最新语言模型的对话系统观察可以发现。在用户每次提交问题，或者Agent生成回答之后，系统才会进行内容审查。我们推测在这里，这些系统使用了和[OpenAIembedding论文]中一致的方法，即抽取大型语言模型的顶层hidden state，作为Encoder的输入来进行Embedding。显然这样做有几个好处: 1. 在一个工业化的架构中，利用大语言模型已经计算得到的隐层信息，可以节省很多运算 2. 大型语言模型已经在非常的语料上进行训练，可以有效增强模型的泛化能力。不过介于在2023年4月之后，已经有很多的大型的embedding模型，我们最终没有对着合格方案进行训练。
+
+
 
 ## 实验
 
@@ -345,6 +433,7 @@ polish the paragraph in ACL, ICML, Science's language style:
     <img src="image/CSEwithText.png" height="350">
 </p>
 
+
 #### 网文新闻测试
 
 我们对Luotuo-BERT在网文新闻30对的数据上进行了测试。我们额外编写了一个可视化，除了热图的展示，我们还抽样展示了热图中涉及数据的文本信息。可以看到
@@ -360,13 +449,15 @@ polish the paragraph in ACL, ICML, Science's language style:
 
 #### 周杰伦挑战
 
-在周杰伦挑战中，我们对比了我们训练之前的基础模型，沈向洋老师IDEA团队的Tai-102M的BERT，以及我们训练后的Luotuo-BERT的结果，同时我们还展示了Hugging Face默认的BERT-base-Chinese模型的结果。（更大BERT的结果将在周一放出）
+在周杰伦挑战中，我们对比了我们训练之前的基础模型，IDEA团队的Tai-102M的BERT，以及我们训练后的Luotuo-BERT的结果，同时我们还展示了Hugging Face默认的BERT-base-Chinese模型的结果。（更大BERT的结果将在周一放出）
 
-周杰伦挑战的图见一开始tSNE可视化。
+周杰伦挑战的图见tSNE可视化。
 
 <p align="center">
     <img src="image/CSEcompare.png" height="350">
 </p>
+
+polish the paragraph in ACL, ICML, Science's language style:
 
 观察下图我们可以得出几个结论
 
@@ -378,18 +469,55 @@ polish the paragraph in ACL, ICML, Science's language style:
 
 ### 定性实验-可视化和聚类
 
-对于任意多类的数据，围绕我们发布的Embedding模型，我们准备了一个特殊的可视化代码，可以将类别展示在二维平面，并抽样展示部分文本的内容。你可以直接在 大模型链接 / 小模型链接 中 运行体验。
+对于任意多类的数据，围绕我们发布的Embedding模型，我们准备了一个t-SNE的可视化代码，可以将类别展示在二维平面，并抽样展示部分文本的内容。你可以直接在 大模型链接 / 小模型链接 中 运行体验。
 
 <p align="center">
     <img src="image/tSNEchallenge.png" height="350">
 </p>
 
-通过可视化看我们可以看到，OpenAI原论文的基本假设基本得到验证，即使是很写意的歌词，在中间切开，去除重复文本之后。前段歌词和后段歌词仍然能够呈现很强的相关性。（除了周杰伦的《外婆》，其他的）歌曲的前后段在特征空间中都很接近。
+通过可视化看我们可以看到，OpenAI原论文的基本假设基本得到验证，即使是很写意的歌词，在中间切开，去除重复文本之后。前段歌词和后段歌词仍然能够呈现很强的相关性。歌曲的前后段在特征空间中都很接近。
 
+polish the paragraph in ACL, ICML, Science's language style:
 
 ### 定量实验
 
+在我们的模型发布后，在m3e的报告中，
+
+| 模型 | text2vec | m3e-small | m3e-base | openai | DMetaSoul | uer | erlangshen | luotuo-bert-medium |
+|---|---|---|---|---|---|---|---| 
+| TNews | 0.43 | 0.4443 | 0.4827 | 0.4594 | 0.3084 | 0.3539 | 0.4361 | 0.4547 |
+| JDIphone | 0.8214 | 0.8293 | 0.8533 | 0.746 | 0.7972 | 0.8283 | 0.8356 | 0.7946 |
+| GubaEastmony | 0.7472 | 0.712 | 0.7621 | 0.7574 | 0.735 | 0.7534 | 0.7787 | 0.7542 |
+| TYQSentiment | 0.6099 | 0.6596 | 0.7188 | 0.68 | 0.6437 | 0.6662 | 0.6444 | 0.6116 | 
+| StockComSentiment | 0.4307 | 0.4291 | 0.4363 | 0.4819 | 0.4309 | 0.4555 | 0.4482 | 0.4913 |
+| IFlyTek | 0.414 | 0.4263 | 0.4409 | 0.4486 | 0.3969 | 0.3762 | 0.4241 | 0.4193 |
+| Average | 0.5755 | 0.5834 | 0.6157| 0.5956 | 0.5520 | 0.5723 | 0.5945 | 0.5876 |
+
+M3E选取了6个文本分类数据集。使用类似MTEB的方式进行测试，汇报了不同模型的准确率。在BGE的汇报中，对更多的任务进行了测试。可以看到在各个任务上，我们的embedding获得了与openai的text-embedding-ada-002相近的性能。考虑到根据[neelakantan2022text]的汇报，OpenAI的embedding使用多达12k的batch size，并训练了超过30000个steps。我们仅用了128的batch size(32 per A100)，在200k规模的数据上训练了不到2000个steps。使用我们的方案所需的计算资源远小于OpenAI。
+
+| Model | Embedding dimension | Avg | Retrieval | STS | PairClassification | Classification | Reranking | Clustering |
+|:-------------------------------|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+| [**bge-large-zh**](https://huggingface.co/BAAI/bge-large-zh) | 1024 | **64.20** | **71.53** | **53.23** | **78.94** | 72.26 | **65.11** | 48.39 |  
+| [bge-large-zh-noinstruct](https://huggingface.co/BAAI/bge-large-zh-noinstruct) | 1024 | 63.53 | 70.55 | 50.98 | 76.77 | **72.49** | 64.91 | **50.01** |   
+| [BAAI/bge-base-zh](https://huggingface.co/BAAI/bge-base-zh) |  768 | 62.96 | 69.53 | 52.05 | 77.5 | 70.98 | 64.91 | 47.63 |  
+| [BAAI/bge-small-zh](https://huggingface.co/BAAI/bge-small-zh) | 512 | 58.27 |  63.07 | 46.87 | 70.35 | 67.78 | 61.48 | 45.09 |  
+| [m3e-base](https://huggingface.co/moka-ai/m3e-base) | 768 | 57.10 |56.91 | 48.15 | 63.99 | 70.28 | 59.34 | 47.68 |  
+| [m3e-large](https://huggingface.co/moka-ai/m3e-large) | 1024 |  57.05 |54.75 | 48.64 | 64.3 | 71.22 | 59.66 | 48.88 |  
+| [text-embedding-ada-002(OpenAI)](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings) | 1536 |  53.02 | 52.0 | 40.61 | 69.56 | 67.38 | 54.28 | 45.68 |  
+| [luotuo](https://huggingface.co/silk-road/luotuo-bert-medium) | 1024 | 49.37 |  44.4 | 39.41 | 66.62 | 65.29 | 49.25 | 44.39 | 
+| [text2vec](https://huggingface.co/shibing624/text2vec-base-chinese) | 768 |  47.63 | 38.79 | 41.71 | 67.41 | 65.18 | 49.45 | 37.66 |  
+| [text2vec-large](https://huggingface.co/GanymedeNil/text2vec-large-chinese) | 1024 | 47.36 | 41.94 | 41.98 | 70.86 | 63.42 | 49.16 | 30.02 |  
+
+在2023年6月之后，又有很多如M3E和BGE这样针对中文的embedding，他们使用了更多数据和计算资源，也对应获得了更好的计算结果。
+
+
 ### 跨语言搜索
+
+需要注意的是，由于OpenAI的text-embedding-ada-002支持非常多的语言，所以我们可以做到跨语言进行embedding的align。
+
+这里我们展示一个跨语言QA的例子，使用中文/英文建库之后，再使用另一种语言进行query问题，看看是否能搜索并回答出正确的问题。这里我们对几种跨越中文-英文的embedding模型进行了定性对比。
+
+
 
 
 ## 结论和讨论
