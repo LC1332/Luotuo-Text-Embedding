@@ -152,7 +152,9 @@ First half: How could there be loaches in the desert A seagull flew by saying Wi
 Second half: On an abandoned termite mound Stands a hungry old ground dove Indian old ground dove Short fur and short legs Can live for days without water A bit of a silly head Saddest when its prey dies Indian old ground dove Can talk like humans Cactus shy Walking lizards Here everything strange happens Including cat-like dogs
 ```
 
-Here is the paragraph polished in ACL/ICML/Science style:
+<p align="center">
+    <img src="image/CSEwithText.png" height="350">
+</p>
 
 #### Web Text News Test
 
@@ -195,7 +197,34 @@ From the visualization we can see that the basic assumption in OpenAI's original
 
 ### Quantitative Experiments 
 
-After releasing our model, the m3e report selected 6 text classification datasets. Similar to MTEB, the accuracy of different models was reported. In the BGE report, more tasks were tested. We can see that our embedding achieves comparable performance to OpenAI's text-embedding-ada-002 on various tasks. Considering the report in [neelakantan2022text] that OpenAI's embedding uses a batch size up to 12k and trains over 30,000 steps, we only used a 128 batch size (32 per A100) and trained for less than 2,000 steps on 200k scale data. The computational resources required by our approach are much less than OpenAI's.
+After releasing our model, the m3e report selected 6 text classification datasets. 
+
+| 模型 | text2vec | m3e-small | m3e-base | openai | DMetaSoul | uer | erlangshen | luotuo-bert-medium |
+|---|---|---|---|---|---|---|---| 
+| TNews | 0.43 | 0.4443 | 0.4827 | 0.4594 | 0.3084 | 0.3539 | 0.4361 | 0.4547 |
+| JDIphone | 0.8214 | 0.8293 | 0.8533 | 0.746 | 0.7972 | 0.8283 | 0.8356 | 0.7946 |
+| GubaEastmony | 0.7472 | 0.712 | 0.7621 | 0.7574 | 0.735 | 0.7534 | 0.7787 | 0.7542 |
+| TYQSentiment | 0.6099 | 0.6596 | 0.7188 | 0.68 | 0.6437 | 0.6662 | 0.6444 | 0.6116 | 
+| StockComSentiment | 0.4307 | 0.4291 | 0.4363 | 0.4819 | 0.4309 | 0.4555 | 0.4482 | 0.4913 |
+| IFlyTek | 0.414 | 0.4263 | 0.4409 | 0.4486 | 0.3969 | 0.3762 | 0.4241 | 0.4193 |
+| Average | 0.5755 | 0.5834 | 0.6157| 0.5956 | 0.5520 | 0.5723 | 0.5945 | 0.5876 |
+
+Similar to MTEB, the accuracy of different models was reported. In the BGE report, more tasks were tested. We can see that our embedding achieves comparable performance to OpenAI's text-embedding-ada-002 on various tasks. Considering the report in [neelakantan2022text] that OpenAI's embedding uses a batch size up to 12k and trains over 30,000 steps, we only used a 128 batch size (32 per A100) and trained for less than 2,000 steps on 200k scale data. The computational resources required by our approach are much less than OpenAI's.
+
+| Model | Embedding dimension | Avg | Retrieval | STS | PairClassification | Classification | Reranking | Clustering |
+|:-------------------------------|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+| [**bge-large-zh**](https://huggingface.co/BAAI/bge-large-zh) | 1024 | **64.20** | **71.53** | **53.23** | **78.94** | 72.26 | **65.11** | 48.39 |  
+| [bge-large-zh-noinstruct](https://huggingface.co/BAAI/bge-large-zh-noinstruct) | 1024 | 63.53 | 70.55 | 50.98 | 76.77 | **72.49** | 64.91 | **50.01** |   
+| [BAAI/bge-base-zh](https://huggingface.co/BAAI/bge-base-zh) |  768 | 62.96 | 69.53 | 52.05 | 77.5 | 70.98 | 64.91 | 47.63 |  
+| [BAAI/bge-small-zh](https://huggingface.co/BAAI/bge-small-zh) | 512 | 58.27 |  63.07 | 46.87 | 70.35 | 67.78 | 61.48 | 45.09 |  
+| [m3e-base](https://huggingface.co/moka-ai/m3e-base) | 768 | 57.10 |56.91 | 48.15 | 63.99 | 70.28 | 59.34 | 47.68 |  
+| [m3e-large](https://huggingface.co/moka-ai/m3e-large) | 1024 |  57.05 |54.75 | 48.64 | 64.3 | 71.22 | 59.66 | 48.88 |  
+| [text-embedding-ada-002(OpenAI)](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings) | 1536 |  53.02 | 52.0 | 40.61 | 69.56 | 67.38 | 54.28 | 45.68 |  
+| [luotuo](https://huggingface.co/silk-road/luotuo-bert-medium) | 1024 | 49.37 |  44.4 | 39.41 | 66.62 | 65.29 | 49.25 | 44.39 | 
+| [text2vec](https://huggingface.co/shibing624/text2vec-base-chinese) | 768 |  47.63 | 38.79 | 41.71 | 67.41 | 65.18 | 49.45 | 37.66 |  
+| [text2vec-large](https://huggingface.co/GanymedeNil/text2vec-large-chinese) | 1024 | 47.36 | 41.94 | 41.98 | 70.86 | 63.42 | 49.16 | 30.02 |
+
+After June 2023, there have been many embedding models targeting Chinese like M3E and BGE. They use more data and computational resources, and correspondingly achieve better results.
 
 ### Cross-Lingual Search
 
